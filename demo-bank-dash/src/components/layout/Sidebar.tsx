@@ -163,30 +163,42 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <aside className="sidebar">
+    <aside className="w-sidebar bg-white border-r border-divider-color p-0 flex flex-col h-screen fixed left-0 top-0 z-10 overflow-y-auto">
       {/* Logo */}
-      <div className="logo">{logoText}</div>
+      <div className="text-primary text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px]">
+        {logoText}
+      </div>
 
       <nav>
         {navSections.map((section, sectionIndex) => (
           <React.Fragment key={sectionIndex}>
             {/* Add section title if exists */}
-            {sectionIndex === 0 && <p className="nav-label">PAGES</p>}
+            {sectionIndex === 1 && (
+              <p className="py-[10px] px-[25px] text-xs font-bold tracking-[0.26px] text-secondary/60 mb-[5px] uppercase">
+                PAGES
+              </p>
+            )}
 
             {/* Navigation Items */}
-            <ul className="nav-items">
+            <ul className="list-none mb-[5px]">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex}>
                   <a
                     href="#"
-                    className={`nav-item ${item.isActive ? "active" : ""}`}
+                    className={`flex items-center py-3 px-[25px] text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors ${
+                      item.isActive
+                        ? "bg-primary text-white relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary"
+                        : ""
+                    }`}
                     onClick={(e) => {
                       e.preventDefault();
                       handleNavClick(item.path);
                     }}
                   >
-                    <i className="nav-icon">{getIconForNav(item.name)}</i>
-                    <span className="nav-text">{item.name}</span>
+                    <i className="mr-[10px] text-base flex items-center justify-center opacity-80 w-5">
+                      {getIconForNav(item.name)}
+                    </i>
+                    <span>{item.name}</span>
                   </a>
                 </li>
               ))}
@@ -194,7 +206,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
             {/* Add divider between sections */}
             {sectionIndex < navSections.length - 1 && (
-              <div className="divider"></div>
+              <div className="h-[1px] bg-divider-color my-[15px] w-full"></div>
             )}
           </React.Fragment>
         ))}

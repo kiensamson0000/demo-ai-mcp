@@ -42,38 +42,38 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="pagination-container">
-      <p className="pagination-info">
+    <div className="flex justify-between items-center mt-5 px-[5px]">
+      <p className="text-sm font-semibold text-[rgba(32,34,36,0.6)]">
         Showing {start.toString().padStart(2, "0")}-
         {end.toString().padStart(2, "0")} of {totalItems}
       </p>
-      <div className="pagination-controls">
+      <div className="flex items-center gap-[5px]">
         <button
-          className={`pagination-button prev-button ${
-            currentPage === 1 ? "disabled" : ""
+          className={`w-8 h-8 bg-[#fafbfd] border border-[#d5d5d5] rounded-lg flex items-center justify-center cursor-pointer transition-colors hover:bg-[#f5f6fa] opacity-60 ${
+            currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handlePrevClick}
           disabled={currentPage === 1}
           aria-label="Previous page"
         >
-          <span className="prev-icon">
+          <span className="flex items-center justify-center">
             <FiChevronLeft />
           </span>
         </button>
 
-        <div className="pagination-divider"></div>
+        <div className="w-[1px] h-[15px] bg-[rgba(151,151,151,0.7)]"></div>
 
         <button
-          className={`pagination-button next-button ${
+          className={`w-8 h-8 bg-[#fafbfd] border border-[#d5d5d5] rounded-lg flex items-center justify-center cursor-pointer transition-colors hover:bg-[#f5f6fa] ${
             currentPage >= Math.ceil(totalItems / itemsPerPage)
-              ? "disabled"
+              ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
           onClick={handleNextClick}
           disabled={currentPage >= Math.ceil(totalItems / itemsPerPage)}
           aria-label="Next page"
         >
-          <span className="next-icon">
+          <span className="flex items-center justify-center">
             <FiChevronRight />
           </span>
         </button>

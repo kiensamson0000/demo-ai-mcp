@@ -1,5 +1,6 @@
-/* Import Nunito Sans font */
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap");
+
+/* Any custom CSS that can't be handled by Tailwind can go here */
 
 /* Reset and base styles */
 * {

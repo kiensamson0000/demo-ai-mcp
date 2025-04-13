@@ -38,42 +38,53 @@ const ProductTable: React.FC<ProductTableProps> = ({
   };
 
   return (
-    <div className="product-table-container">
+    <div className="bg-white border border-[#b9b9b9] rounded-[14px] overflow-hidden mb-5 shadow-sm">
       {/* Table Header */}
-      <div className="table-header-row">
-        <div className="table-header-cell image-header">Image</div>
-        <div className="table-header-cell name-header">Product Name</div>
-        <div className="table-header-cell category-header">Category</div>
-        <div className="table-header-cell price-header">Price</div>
-        <div className="table-header-cell quantity-header">Piece</div>
-        <div className="table-header-cell colors-header">Available Color</div>
-        <div className="table-header-cell actions-header">Action</div>
+      <div className="grid grid-cols-[120px_1.5fr_1fr_1fr_0.5fr_1.5fr_0.5fr] bg-white border-b border-[#d5d5d5] p-[15px_20px] items-center">
+        <div className="text-sm font-bold text-[#202224]">Image</div>
+        <div className="text-sm font-bold text-[#202224]">Product Name</div>
+        <div className="text-sm font-bold text-[#202224]">Category</div>
+        <div className="text-sm font-bold text-[#202224]">Price</div>
+        <div className="text-sm font-bold text-[#202224]">Piece</div>
+        <div className="text-sm font-bold text-[#202224]">Available Color</div>
+        <div className="text-sm font-bold text-[#202224]">Action</div>
       </div>
 
       {/* Table Rows */}
       {products.map((product) => (
-        <div key={product.id} className="table-data-row">
+        <div
+          key={product.id}
+          className="grid grid-cols-[120px_1.5fr_1fr_1fr_0.5fr_1.5fr_0.5fr] p-[15px_20px] border-b border-opacity-60 border-[#979797] items-center transition-colors hover:bg-black hover:bg-opacity-[0.01]"
+        >
           {/* Product Image */}
-          <div className="table-cell image-cell">
-            <div className="product-image-container">
+          <div className="flex items-center justify-center">
+            <div className="w-20 h-20 overflow-hidden rounded-lg">
               <img
                 src={product.image}
                 alt={product.name}
-                className="product-image"
+                className="w-full h-full object-cover"
                 loading="lazy" // Lazy load images for better performance
               />
             </div>
           </div>
 
           {/* Product Details */}
-          <div className="table-cell name-cell">{product.name}</div>
-          <div className="table-cell category-cell">{product.category}</div>
-          <div className="table-cell price-cell">{product.price}</div>
-          <div className="table-cell quantity-cell">{product.quantity}</div>
+          <div className="text-sm font-semibold text-[rgba(32,34,36,0.9)]">
+            {product.name}
+          </div>
+          <div className="text-sm font-semibold text-[rgba(32,34,36,0.9)]">
+            {product.category}
+          </div>
+          <div className="text-sm font-semibold text-[rgba(32,34,36,0.9)]">
+            {product.price}
+          </div>
+          <div className="text-sm font-semibold text-[rgba(32,34,36,0.9)]">
+            {product.quantity}
+          </div>
 
           {/* Color Options */}
-          <div className="table-cell colors-cell">
-            <div className="color-options">
+          <div className="text-sm font-semibold text-[rgba(32,34,36,0.9)]">
+            <div className="flex gap-[5px]">
               {product.colors.map((color, index) => (
                 <ColorCircle key={index} color={color} />
               ))}
@@ -81,23 +92,23 @@ const ProductTable: React.FC<ProductTableProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="table-cell actions-cell">
+          <div className="flex gap-[5px] items-center">
             <button
-              className="action-button edit-button"
+              className="w-[30px] h-[30px] bg-[#fafbfd] border border-[#d5d5d5] rounded-lg flex items-center justify-center cursor-pointer transition-colors hover:bg-[#f5f6fa] opacity-60"
               onClick={() => handleEdit(product.id)}
               aria-label={`Edit ${product.name}`}
             >
-              <span className="edit-icon">
+              <span className="text-sm flex items-center justify-center">
                 <FiEdit2 />
               </span>
             </button>
-            <div className="action-divider"></div>
+            <div className="w-[1px] h-[15px] bg-[rgba(151,151,151,0.7)]"></div>
             <button
-              className="action-button delete-button"
+              className="w-[30px] h-[30px] bg-[#fafbfd] border border-[#d5d5d5] rounded-lg flex items-center justify-center cursor-pointer transition-colors hover:bg-[#f5f6fa]"
               onClick={() => handleDelete(product.id)}
               aria-label={`Delete ${product.name}`}
             >
-              <span className="delete-icon">
+              <span className="text-sm flex items-center justify-center text-[#ef3826]">
                 <FiTrash2 />
               </span>
             </button>

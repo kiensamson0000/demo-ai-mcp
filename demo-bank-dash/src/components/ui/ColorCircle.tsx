@@ -7,17 +7,15 @@ interface ColorCircleProps {
 /**
  * ColorCircle Component
  *
- * Renders a circular color swatch with the specified color
- * Used in the product table to display available color options
+ * Displays a color circle for product color options
  *
- * @param {string} color - Hex color code or valid CSS color value
+ * @param {string} color - The color to display
  */
 const ColorCircle: React.FC<ColorCircleProps> = ({ color }) => {
   return (
     <div
-      className="color-circle"
+      className="w-4 h-4 rounded-full shadow-sm"
       style={{ backgroundColor: color }}
-      aria-label={`Color: ${color}`} // Accessibility enhancement
     />
   );
 };

@@ -65,11 +65,16 @@ const ProductStock: React.FC = () => {
   };
 
   return (
-    <main>
-      <div className="header-product-stock">
-        <h1 className="page-title">Product Stock</h1>
+    <main className="px-8 py-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-[#202224] -tracking-[0.11px]">
+          Product Stock
+        </h1>
 
-        <ProductSearch onSearch={handleSearch} />
+        {/* Search Bar */}
+        <div className="w-[300px]">
+          <ProductSearch onSearch={handleSearch} />
+        </div>
       </div>
 
       {/* Product Table */}
