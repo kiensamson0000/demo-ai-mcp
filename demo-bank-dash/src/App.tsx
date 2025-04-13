@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "./styles/dashboard.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -23,13 +24,13 @@ const App: React.FC = () => {
   const [activePath, setActivePath] = useState("/dashboard");
 
   // Handle navigation
-  const handleNavigation = (path: string, isLogout: boolean = false) => {
-    if (isLogout) {
-      // Handle logout logic here
-      console.log("Logging out...");
-      return;
-    }
+  const handleNavigation = (path: string) => {
     setActivePath(path);
+    // Handle logout logic if needed
+    if (path === "/logout") {
+      // Logout logic here
+      console.log("Logging out...");
+    }
   };
 
   return (

@@ -7,10 +7,16 @@ import {
   FiUsers,
   FiShoppingBag,
   FiChevronDown,
+  FiChevronLeft,
+  FiChevronRight,
 } from "react-icons/fi";
 import appleWatch from "../assets/apple-watch.png";
 import microsoftHeadset from "../assets/microsoft-headset.png";
 import samsungA50 from "../assets/samsung-A50.png";
+import beatsHeadphones from "../assets/microsoft-headset.png";
+import salesAnalyticsSvg from "../assets/figma/sales-analytics.svg";
+import revenueChartSvg from "../assets/figma/revenue-chart.svg";
+import customerChartSvg from "../assets/figma/customer-chart.svg";
 
 const Dashboard: React.FC = () => {
   return (
@@ -253,6 +259,164 @@ const Dashboard: React.FC = () => {
             <div>
               <span className="status-badge status-rejected">Rejected</span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Revenue Chart */}
+      <div className="bg-white rounded-[14px] shadow-md p-6 card-hover mt-6">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-[#202224]">Revenue</h2>
+          <div className="border border-[#D5D5D5] rounded px-3 py-1 flex items-center text-sm text-[rgba(43,48,52,0.4)]">
+            <span>October</span>
+            <FiChevronDown className="ml-2" />
+          </div>
+        </div>
+
+        <div className="flex items-center mb-4 space-x-6">
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-full bg-[#E3B9FF] mr-2"></div>
+            <span className="text-[#282D32] font-bold">Profit</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-full bg-[#F9978A] mr-2"></div>
+            <span className="text-[#282D32] font-bold">Sales</span>
+          </div>
+        </div>
+
+        <div className="revenue-chart relative h-[250px]">
+          {/* Revenue Chart SVG */}
+          <img
+            src={revenueChartSvg}
+            alt="Revenue Chart"
+            className="w-full h-full"
+          />
+
+          {/* Y-axis Labels */}
+          <div className="absolute left-0 top-0 h-full flex flex-col justify-between py-2 text-xs text-[rgba(43,48,52,0.4)] font-semibold">
+            <span>60k</span>
+            <span>55k</span>
+            <span>50k</span>
+            <span>45k</span>
+            <span>40k</span>
+          </div>
+
+          {/* X-axis Labels */}
+          <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-[rgba(43,48,52,0.4)] font-semibold">
+            <span>20</span>
+            <span>40</span>
+            <span>60</span>
+            <span>80</span>
+            <span>100</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6 ">
+        {/* Customers Card */}
+        <div className="bg-white rounded-[14px] shadow-md p-6 card-hover">
+          <h2 className="text-2xl font-bold text-[#202224] mb-6">Customers</h2>
+
+          <div className="flex justify-center mb-6">
+            <img
+              src={customerChartSvg}
+              alt="Customer Chart"
+              className="w-40 h-40"
+            />
+          </div>
+
+          <div className="flex justify-around">
+            {/* New Customers */}
+            <div className="relative">
+              <h3 className="text-[28px] font-bold tracking-[1px] text-[#202224] mt-2">
+                34,249
+              </h3>
+              <div className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-[#4880FF] mr-2"></div>
+                <span className="text-[#282D32] text-base font-semibold opacity-80">
+                  New Customers
+                </span>
+              </div>
+            </div>
+
+            {/* Repeated Customers */}
+            <div className="relative">
+              <h3 className="text-[28px] font-bold tracking-[1px] text-center text-[#202224] mt-2">
+                1,420
+              </h3>
+              <div className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-[#C0D2F0] mr-2"></div>
+                <span className="text-[#282D32] text-base font-semibold opacity-80">
+                  Repeated
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Featured Product Card */}
+        <div className="bg-white rounded-[14px] shadow-md p-6 card-hover relative">
+          <h2 className="text-2xl font-bold text-[#202224] mb-6">
+            Featured Product
+          </h2>
+
+          <div className="flex justify-center mb-4">
+            <img
+              src={beatsHeadphones}
+              alt="Beats Headphone"
+              className="w-40 h-40 object-contain"
+            />
+          </div>
+
+          <h3 className="text-lg font-bold text-[#282D32] text-center">
+            Beats Headphone 2019
+          </h3>
+          <p className="text-[#4880FF] font-bold text-center opacity-70 mt-1 mb-6">
+            $89.00
+          </p>
+
+          {/* Navigation Arrows */}
+          <div className="absolute right-6 top-6 flex space-x-2">
+            <button className="nav-arrow">
+              <FiChevronLeft className="nav-arrow-icon" />
+            </button>
+            <button className="nav-arrow">
+              <FiChevronRight className="nav-arrow-icon" />
+            </button>
+          </div>
+        </div>
+
+        {/* Sales Analytics Card */}
+        <div className="bg-white rounded-[14px] shadow-md p-6 card-hover">
+          <h2 className="text-2xl font-bold text-[#202224] mb-6">
+            Sales Analytics
+          </h2>
+
+          <div className="h-[250px] relative mb-4">
+            {/* Sales Analytics Chart SVG */}
+            <img
+              src={salesAnalyticsSvg}
+              alt="Sales Analytics"
+              className="w-full h-full"
+            />
+
+            {/* Y-axis Labels */}
+            <div className="absolute right-0 top-0 h-full flex flex-col justify-between text-xs text-[rgba(41,44,47,0.4)] font-semibold">
+              <span>100</span>
+              <span>75</span>
+              <span>50</span>
+              <span>25</span>
+              <span>0</span>
+            </div>
+          </div>
+
+          {/* X-axis Labels */}
+          <div className="flex justify-between text-xs text-[rgba(41,44,47,0.4)] font-semibold px-6">
+            <span>2015</span>
+            <span>2016</span>
+            <span>2017</span>
+            <span>2018</span>
+            <span>2019</span>
           </div>
         </div>
       </div>

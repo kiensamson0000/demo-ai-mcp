@@ -1,0 +1,113 @@
+/* Dashboard Specific Styles */
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Sales Analytics Chart */
+.sales-chart-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 2s ease-in-out forwards;
+}
+
+.sales-chart-point {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+/* Profit Line */
+.profit-line {
+  stroke: #00b69b;
+  stroke-width: 4px;
+}
+
+.profit-point {
+  fill: #00b69b;
+  stroke: white;
+  stroke-width: 1.4px;
+}
+
+/* Sales Line */
+.sales-line {
+  stroke: #4880ff;
+  stroke-width: 4px;
+}
+
+.sales-point {
+  fill: #4880ff;
+  stroke: white;
+  stroke-width: 1.4px;
+}
+
+/* Revenue Chart */
+.revenue-chart {
+  position: relative;
+  height: 250px;
+}
+
+.revenue-profit {
+  fill: #dba5ff;
+  opacity: 0.78;
+}
+
+.revenue-sales {
+  fill: rgba(255, 143, 109, 0.8);
+}
+
+/* Customer Data Visualization */
+.customer-chart-bg {
+  stroke: #c0d2f0;
+  stroke-width: 15px;
+  opacity: 0.46;
+}
+
+.customer-chart-main {
+  stroke: #4880ff;
+  stroke-width: 15px;
+  stroke-dasharray: 350 10000;
+}
+
+/* Featured Product Navigation */
+.nav-arrow {
+  background-color: #e2eaf8;
+  opacity: 0.4;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.nav-arrow:hover {
+  opacity: 0.7;
+}
+
+.nav-arrow-icon {
+  color: #626262;
+}
+
+/* Animations */
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
