@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./styles/dashboard.css";
+import "./styles/inbox.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -9,6 +10,8 @@ import Navbar from "./components/layout/Navbar";
 // Pages
 import ProductStock from "./pages/ProductStock";
 import Dashboard from "./pages/Dashboard";
+import ProductUI from "./pages/ProductUI";
+import InboxPage from "./pages/InboxPage";
 
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
@@ -50,6 +53,8 @@ const App: React.FC = () => {
         <div className="flex-1 overflow-y-auto">
           {activePath === "/dashboard" && <Dashboard />}
           {activePath === "/product-stock" && <ProductStock />}
+          {activePath === "/products" && <ProductUI />}
+          {activePath === "/inbox" && <InboxPage />}
         </div>
       </div>
     </div>

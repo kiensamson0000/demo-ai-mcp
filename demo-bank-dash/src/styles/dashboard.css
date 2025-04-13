@@ -96,6 +96,57 @@
   color: #626262;
 }
 
+/* Featured Product Banner */
+.featured-product-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-product-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 255, 255, 0.1) 10px,
+      transparent 10px
+    ),
+    radial-gradient(
+      circle at 20% 40%,
+      rgba(255, 255, 255, 0.1) 15px,
+      transparent 15px
+    ),
+    radial-gradient(
+      circle at 30% 60%,
+      rgba(255, 255, 255, 0.1) 20px,
+      transparent 20px
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(255, 255, 255, 0.1) 25px,
+      transparent 25px
+    ),
+    radial-gradient(
+      circle at 60% 10%,
+      rgba(255, 255, 255, 0.1) 30px,
+      transparent 30px
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(255, 255, 255, 0.1) 20px,
+      transparent 20px
+    ),
+    radial-gradient(
+      circle at 90% 60%,
+      rgba(255, 255, 255, 0.1) 15px,
+      transparent 15px
+    );
+  opacity: 0.2;
+}
+
 /* Animations */
 @keyframes dash {
   to {
