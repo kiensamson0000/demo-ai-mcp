@@ -22,7 +22,7 @@ import { NavSection } from "../../types";
 interface SidebarProps {
   logoText: string;
   activePath?: string;
-  onNavItemClick?: (path: string) => void;
+  onNavigate?: (path: string, isLogout?: boolean) => void;
 }
 
 /**
@@ -32,12 +32,12 @@ interface SidebarProps {
  *
  * @param {string} logoText - Text to display in the logo area
  * @param {string} activePath - Optional currently active path to highlight
- * @param {function} onNavItemClick - Optional callback when navigation item is clicked
+ * @param {function} onNavigate - Optional callback when navigation item is clicked
  */
 const Sidebar: React.FC<SidebarProps> = ({
   logoText,
-  activePath = "/product-stock",
-  onNavItemClick,
+  activePath = "/dashboard",
+  onNavigate,
 }) => {
   // Navigation data structure
   const navSections: NavSection[] = [
@@ -74,15 +74,16 @@ const Sidebar: React.FC<SidebarProps> = ({
     {
       items: [
         {
-          name: "Calender",
-          path: "/calendar",
-          isActive: activePath === "/calendar",
-        },
-        {
           name: "Pricing",
           path: "/pricing",
           isActive: activePath === "/pricing",
         },
+        {
+          name: "Calender",
+          path: "/calendar",
+          isActive: activePath === "/calendar",
+        },
+
         { name: "To-Do", path: "/todo", isActive: activePath === "/todo" },
         {
           name: "Contact",
@@ -157,13 +158,15 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   // Handle navigation item click
   const handleNavClick = (path: string) => {
-    if (onNavItemClick) {
-      onNavItemClick(path);
+    if (onNavigate) {
+      // Check if this is a logout action
+      const isLogout = path === "/logout";
+      onNavigate(path, isLogout);
     }
   };
 
   return (
-    <aside className="w-sidebar bg-white border-r border-divider-color p-0 flex flex-col h-screen fixed left-0 top-0 z-10 overflow-y-auto">
+    <aside className="w-[260px] bg-white border-r border-divider-color p-0 flex flex-col h-screen fixed left-0 top-0 z-10 overflow-y-auto">
       {/* Logo */}
       <div className="text-primary text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px]">
         {logoText}

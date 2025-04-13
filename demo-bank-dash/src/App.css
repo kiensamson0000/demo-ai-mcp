@@ -1,5 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap");
 
+/* CSS variables for consistent color usage based on Figma design */
+:root {
+  --primary: #4880ff;
+  --primary-light: rgba(72, 128, 255, 0.1);
+  --background: #f5f6fa;
+  --text-primary: #202224;
+  --text-secondary: #565656;
+  --text-muted: rgba(32, 34, 36, 0.6);
+  --divider: #e0e0e0;
+  --card-bg: #ffffff;
+  --success: #00b69b;
+  --warning: #fcbe2d;
+  --danger: #fd5454;
+  --notification: #f93c65;
+  --chart-blue: #4379ee;
+  --icon-orange: #ff9066;
+  --icon-purple: #8280ff;
+  --icon-green: #4ad991;
+  --icon-yellow: #fec53d;
+}
+
 /* Any custom CSS that can't be handled by Tailwind can go here */
 
 /* Reset and base styles */
@@ -11,8 +32,8 @@
 
 body {
   font-family: "Nunito Sans", sans-serif;
-  background-color: #f5f6fa; /* Main background color from Figma */
-  color: #202224; /* Default text color */
+  background-color: var(--background);
+  color: var(--text-primary);
 }
 
 .app {
@@ -533,5 +554,65 @@ main {
 
   .logo {
     padding: 25px 20px;
+  }
+}
+
+/* For the Sales chart */
+.sales-chart-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 2s ease-in-out forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* For smooth card hover effects */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Status badges */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-delivered {
+  background-color: var(--success);
+}
+
+.status-pending {
+  background-color: var(--warning);
+}
+
+.status-rejected {
+  background-color: var(--danger);
+}
+
+/* For responsive table layout */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 }

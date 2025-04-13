@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./App.css";
+import "./App.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -7,6 +7,7 @@ import Navbar from "./components/layout/Navbar";
 
 // Pages
 import ProductStock from "./pages/ProductStock";
+import Dashboard from "./pages/Dashboard";
 
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
@@ -18,34 +19,36 @@ import ProductStock from "./pages/ProductStock";
  * and handles global state and navigation
  */
 const App: React.FC = () => {
-  // Current active path for navigation
-  const [activePath, setActivePath] = useState("/product-stock");
+  // State to track active path for navigation
+  const [activePath, setActivePath] = useState("/dashboard");
 
-  // Handle navigation item clicks
-  const handleNavigation = (path: string) => {
-    // In a real app with routing, you would use a router to navigate
-    // For this demo, we'll just update the active path
-    setActivePath(path);
-
-    // If "logout" is clicked, we could handle logout logic here
-    if (path === "/logout") {
-      console.log("User logged out");
-      // In a real app: authService.logout();
+  // Handle navigation
+  const handleNavigation = (path: string, isLogout: boolean = false) => {
+    if (isLogout) {
+      // Handle logout logic here
+      console.log("Logging out...");
+      return;
     }
+    setActivePath(path);
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f5f6fa]">
+    <div className="App flex h-screen bg-[#f5f6fa]">
+      {/* Sidebar */}
       <Sidebar
         logoText="DashStack"
         activePath={activePath}
-        onNavItemClick={handleNavigation}
+        onNavigate={handleNavigation}
       />
 
-      <div className="flex-1 flex flex-col ml-[260px]">
+      <div className="flex-1 flex flex-col overflow-hidden ml-[260px]">
+        {/* Navbar */}
         <Navbar />
-        <div className="mt-header pt-4">
-          <ProductStock />
+
+        {/* Main Content */}
+        <div className="flex-1 overflow-y-auto">
+          {activePath === "/dashboard" && <Dashboard />}
+          {activePath === "/product-stock" && <ProductStock />}
         </div>
       </div>
     </div>
