@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import "./styles/dashboard.css";
 import "./styles/inbox.css";
+import "./styles/orderLists.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -12,6 +13,7 @@ import ProductStock from "./pages/ProductStock";
 import Dashboard from "./pages/Dashboard";
 import ProductUI from "./pages/ProductUI";
 import InboxPage from "./pages/InboxPage";
+import OrderLists from "./pages/OrderLists";
 
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
@@ -55,6 +57,7 @@ const App: React.FC = () => {
           {activePath === "/product-stock" && <ProductStock />}
           {activePath === "/products" && <ProductUI />}
           {activePath === "/inbox" && <InboxPage />}
+          {activePath === "/order-lists" && <OrderLists />}
         </div>
       </div>
     </div>

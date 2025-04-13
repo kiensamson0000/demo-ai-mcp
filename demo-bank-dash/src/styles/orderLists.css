@@ -1,0 +1,132 @@
+/* Order Lists Page Styles */
+
+/* Status Labels */
+.status-completed {
+  background-color: rgba(0, 182, 155, 0.2);
+  color: #00b69b;
+}
+
+.status-processing {
+  background-color: rgba(98, 38, 239, 0.2);
+  color: #6226ef;
+}
+
+.status-rejected {
+  background-color: rgba(239, 56, 38, 0.2);
+  color: #ef3826;
+}
+
+.status-onhold {
+  background-color: rgba(255, 167, 86, 0.2);
+  color: #ffa756;
+}
+
+.status-intransit {
+  background-color: rgba(186, 41, 255, 0.2);
+  color: #ba29ff;
+}
+
+/* Table Styles */
+.order-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.order-table th {
+  background-color: #fcfdfd;
+  font-weight: 800;
+  color: rgba(32, 34, 36, 0.9);
+  font-size: 14px;
+  text-align: left;
+  padding: 16px 24px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.order-table tr {
+  border-bottom: 1px solid rgba(151, 151, 151, 0.6);
+}
+
+.order-table tr:last-child {
+  border-bottom: none;
+}
+
+.order-table td {
+  padding: 16px 24px;
+  font-weight: 600;
+  color: rgba(32, 34, 36, 0.9);
+  font-size: 14px;
+}
+
+/* Filter Section */
+.filter-section {
+  background-color: #f9f9fb;
+  border-radius: 10px;
+  border: 1px solid #d5d5d5;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.filter-item {
+  border-bottom: 1px solid rgba(151, 151, 151, 0.7);
+  position: relative;
+}
+
+.filter-label {
+  font-weight: 700;
+  color: #202224;
+  margin-bottom: 8px;
+}
+
+.reset-button {
+  color: #ea0234;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-info {
+  color: rgba(32, 34, 36, 0.6);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pagination-controls {
+  background-color: #fafbfd;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  height: 36px;
+}
+
+.pagination-button {
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.pagination-divider {
+  height: 20px;
+  width: 1px;
+  background-color: rgba(151, 151, 151, 0.7);
+  margin: 0 4px;
+}
+
+/* Status Label */
+.status-label {
+  border-radius: 4.5px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}

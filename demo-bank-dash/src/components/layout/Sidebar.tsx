@@ -61,8 +61,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         { name: "Inbox", path: "/inbox", isActive: activePath === "/inbox" },
         {
           name: "Order Lists",
-          path: "/orders",
-          isActive: activePath === "/orders",
+          path: "/order-lists",
+          isActive: activePath === "/order-lists",
         },
         {
           name: "Product Stock",
