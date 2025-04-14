@@ -1,0 +1,37 @@
+/* Contact Page Styles */
+
+.contact-card {
+  transition: all 0.2s ease-in-out;
+  min-height: 320px;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Message button styling */
+.message-btn {
+  transition: all 0.2s ease;
+  border: 0.4px solid rgba(151, 151, 151, 0.2);
+  background-color: #4c82ff !important;
+  color: white !important;
+  letter-spacing: 0.35px;
+}
+
+.message-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Add new contact button */
+.add-contact-button {
+  transition: all 0.2s ease;
+  background-color: #4379ee;
+}
+
+.add-contact-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(67, 121, 238, 0.2);
+  background-color: #3668d8;
+}

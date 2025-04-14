@@ -5,6 +5,8 @@ import "./styles/inbox.css";
 import "./styles/orderLists.css";
 import "./styles/pricing.css";
 import "./styles/calendar.css";
+import "./styles/todo.css";
+import "./styles/contact.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -18,6 +20,8 @@ import InboxPage from "./pages/InboxPage";
 import OrderLists from "./pages/OrderLists";
 import PricingPage from "./pages/PricingPage";
 import Calendar from "./pages/Calendar";
+import TodoPage from "./pages/TodoPage";
+import ContactPage from "./pages/ContactPage";
 
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
@@ -64,6 +68,8 @@ const App: React.FC = () => {
           {activePath === "/order-lists" && <OrderLists />}
           {activePath === "/pricing" && <PricingPage />}
           {activePath === "/calendar" && <Calendar />}
+          {activePath === "/todo" && <TodoPage />}
+          {activePath === "/contact" && <ContactPage />}
         </div>
       </div>
     </div>
