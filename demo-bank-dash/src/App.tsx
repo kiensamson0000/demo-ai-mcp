@@ -25,6 +25,7 @@ import TodoPage from "./pages/TodoPage";
 import ContactPage from "./pages/ContactPage";
 import InvoicePage from "./pages/InvoicePage";
 import ElementsUI from "./pages/ElementsUI";
+import Table from "./pages/Table";
 
 /**
  * Main App Component
@@ -72,6 +73,7 @@ const App: React.FC = () => {
           {activePath === "/contact" && <ContactPage />}
           {activePath === "/invoice" && <InvoicePage />}
           {activePath === "/ui-elements" && <ElementsUI />}
+          {activePath === "/table" && <Table />}
         </div>
       </div>
     </div>
