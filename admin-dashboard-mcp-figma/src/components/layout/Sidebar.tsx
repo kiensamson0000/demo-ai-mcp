@@ -90,7 +90,6 @@ const Sidebar: React.FC<SidebarProps> = ({
           path: "/calendar",
           isActive: currentPath === "/calendar",
         },
-
         { name: "To-Do", path: "/todo", isActive: currentPath === "/todo" },
         {
           name: "Contact",

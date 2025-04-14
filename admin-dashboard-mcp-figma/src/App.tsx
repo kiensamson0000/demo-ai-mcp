@@ -14,6 +14,7 @@ import "./assets/styles/calendar.css";
 import "./assets/styles/todo.css";
 import "./assets/styles/contact.css";
 import "./assets/styles/invoice.css";
+import "./assets/styles/settings.css";
 
 // Auth Provider
 import { AuthProvider } from "./contexts/AuthContext";
@@ -40,6 +41,7 @@ import InvoicePage from "./pages/InvoicePage";
 import ElementsUI from "./pages/ElementsUI";
 import Table from "./pages/Table";
 import TeamPage from "./pages/TeamPage";
+import Settings from "./pages/Settings";
 
 /**
  * Main App Component
@@ -71,6 +73,7 @@ const App: React.FC = () => {
               <Route path="/ui-elements" element={<ElementsUI />} />
               <Route path="/table" element={<Table />} />
               <Route path="/team" element={<TeamPage />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>
 
