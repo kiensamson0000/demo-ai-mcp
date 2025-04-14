@@ -95,7 +95,7 @@ export const getSalesChartOptions = (currentMonthData: {
             size: 12,
             weight: "bold",
           },
-          callback: function (value, index) {
+          callback: function (_value, index) {
             // Show fewer labels to avoid crowding
             return index % 2 === 0 ? currentMonthData.quantities[index] : "";
           },
