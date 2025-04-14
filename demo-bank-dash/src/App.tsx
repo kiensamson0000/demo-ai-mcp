@@ -4,6 +4,7 @@ import "./styles/dashboard.css";
 import "./styles/inbox.css";
 import "./styles/orderLists.css";
 import "./styles/pricing.css";
+import "./styles/calendar.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -16,6 +17,7 @@ import ProductUI from "./pages/ProductUI";
 import InboxPage from "./pages/InboxPage";
 import OrderLists from "./pages/OrderLists";
 import PricingPage from "./pages/PricingPage";
+import Calendar from "./pages/Calendar";
 
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
@@ -61,6 +63,7 @@ const App: React.FC = () => {
           {activePath === "/inbox" && <InboxPage />}
           {activePath === "/order-lists" && <OrderLists />}
           {activePath === "/pricing" && <PricingPage />}
+          {activePath === "/calendar" && <Calendar />}
         </div>
       </div>
     </div>

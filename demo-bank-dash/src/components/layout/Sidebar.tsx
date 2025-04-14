@@ -79,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           isActive: activePath === "/pricing",
         },
         {
-          name: "Calender",
+          name: "Calendar",
           path: "/calendar",
           isActive: activePath === "/calendar",
         },
@@ -131,7 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         return <FiList />;
       case "product stock":
         return <FiDatabase />;
-      case "calender":
+      case "calendar":
         return <FiCalendar />;
       case "pricing":
         return <FiDollarSign />;
