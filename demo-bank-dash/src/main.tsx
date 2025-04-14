@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import "./styles/dashboard.css";
+import "./assets/styles/dashboard.css";
 
 // Create root and render app
 const root = ReactDOM.createRoot(document.getElementById("root")!);

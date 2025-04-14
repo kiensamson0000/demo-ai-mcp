@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
-import "./styles/dashboard.css";
-import "./styles/inbox.css";
-import "./styles/orderLists.css";
-import "./styles/pricing.css";
-import "./styles/calendar.css";
-import "./styles/todo.css";
-import "./styles/contact.css";
-import "./styles/invoice.css";
+import "./assets/styles/dashboard.css";
+import "./assets/styles/inbox.css";
+import "./assets/styles/orderLists.css";
+import "./assets/styles/pricing.css";
+import "./assets/styles/calendar.css";
+import "./assets/styles/todo.css";
+import "./assets/styles/contact.css";
+import "./assets/styles/invoice.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -24,7 +24,7 @@ import Calendar from "./pages/Calendar";
 import TodoPage from "./pages/TodoPage";
 import ContactPage from "./pages/ContactPage";
 import InvoicePage from "./pages/InvoicePage";
-
+import ElementsUI from "./pages/ElementsUI";
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
 
@@ -73,6 +73,7 @@ const App: React.FC = () => {
           {activePath === "/todo" && <TodoPage />}
           {activePath === "/contact" && <ContactPage />}
           {activePath === "/invoice" && <InvoicePage />}
+          {activePath === "/ui-elements" && <ElementsUI />}
         </div>
       </div>
     </div>

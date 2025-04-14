@@ -11,7 +11,7 @@ import {
   FiEdit,
   FiSend,
 } from "react-icons/fi";
-import "../styles/inbox.css"; // Import the inbox styles
+import "../assets/styles/inbox.css"; // Import the inbox styles
 
 interface EmailMessage {
   id: number;
