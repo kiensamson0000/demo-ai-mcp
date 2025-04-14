@@ -10,6 +10,23 @@ import {
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend,
+  ChartOptions,
+  ChartData,
+  TooltipItem,
+  ScriptableContext,
+  Plugin,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 import appleWatch from "../assets/images/products/apple-watch.png";
 import microsoftHeadset from "../assets/images/products/microsoft-headset.png";
 import samsungA50 from "../assets/images/products/samsung-A50.png";
@@ -18,7 +35,204 @@ import salesAnalyticsSvg from "../assets/icons/sales-analytics.svg";
 import revenueChartSvg from "../assets/icons/revenue-chart.svg";
 import customerChartSvg from "../assets/icons/customer-chart.svg";
 
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend
+);
+
+// Define chart types
+type SalesChartData = ChartData<"line">;
+type SalesChartOptions = ChartOptions<"line">;
+
+// Add a custom plugin for the top sales indicator
+const topSalesPlugin: Plugin<"line"> = {
+  id: "topSales",
+  afterDraw: (chart) => {
+    const { ctx, scales } = chart;
+    const dataset = chart.data.datasets[0];
+    if (!dataset || !dataset.data) return;
+
+    const data = dataset.data as number[];
+    const maxValue = Math.max(...data);
+    const maxIndex = data.indexOf(maxValue);
+
+    // Check if we have valid data
+    if (maxIndex === -1) return;
+
+    const xScale = scales.x;
+    const yScale = scales.y;
+    if (!xScale || !yScale) return;
+
+    const x = xScale.getPixelForValue(maxIndex);
+    const y = yScale.getPixelForValue(maxValue);
+
+    // Draw a larger point at the max value
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, 2 * Math.PI);
+    ctx.fillStyle = "#4880FF";
+    ctx.fill();
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.closePath();
+    ctx.restore();
+  },
+};
+
 const Dashboard: React.FC = () => {
+  // Chart data configuration
+  const salesChartData: SalesChartData = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "Sales",
+        data: [
+          30000, 35000, 25000, 45000, 55000, 40000, 60000, 45000, 35000, 50000,
+          45000, 60000,
+        ],
+        borderColor: "#4379EE",
+        borderWidth: 1.5,
+        pointBackgroundColor: "#4379EE",
+        pointBorderColor: "#fff",
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        tension: 0.4,
+        fill: true,
+        backgroundColor: (context: ScriptableContext<"line">) => {
+          const ctx = context.chart.ctx;
+          const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+          gradient.addColorStop(0, "rgba(67, 121, 238, 0.16)");
+          gradient.addColorStop(1, "rgba(255, 255, 255, 0.18)");
+          return gradient;
+        },
+      },
+    ],
+  };
+
+  // Chart options configuration
+  const salesChartOptions: SalesChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: "#5E77FF",
+        titleFont: {
+          family: "Nunito Sans",
+          size: 12,
+          weight: "bold",
+        },
+        bodyFont: {
+          family: "Nunito Sans",
+          size: 12,
+          weight: "bold",
+        },
+        padding: 10,
+        displayColors: false,
+        callbacks: {
+          label: function (context: TooltipItem<"line">) {
+            return `$${context.parsed.y.toLocaleString()}`;
+          },
+        },
+        // Add custom tooltip styling
+        titleMarginBottom: 6,
+        cornerRadius: 4,
+        caretSize: 6,
+      },
+    },
+    animation: {
+      duration: 2000,
+      easing: "easeOutQuart",
+      delay: (context) => {
+        return context.dataIndex * 100;
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "rgba(43, 48, 52, 0.4)",
+          font: {
+            family: "Nunito Sans",
+            size: 12,
+            weight: "bold",
+          },
+        },
+        border: {
+          display: false,
+        },
+      },
+      y: {
+        position: "left",
+        grid: {
+          color: "#EAEAEA",
+          lineWidth: 1,
+        },
+        border: {
+          display: false,
+        },
+        ticks: {
+          color: "rgba(43, 48, 52, 0.4)",
+          font: {
+            family: "Nunito Sans",
+            size: 12,
+            weight: "bold",
+          },
+          callback: function (value) {
+            return value >= 1000 ? `${value / 1000}k` : value;
+          },
+          padding: 10,
+        },
+        min: 0,
+        max: 70000,
+        stepSize: 10000,
+      },
+    },
+    layout: {
+      padding: {
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 20,
+      },
+    },
+    interaction: {
+      mode: "index" as const,
+      intersect: false,
+    },
+    elements: {
+      point: {
+        hitRadius: 10,
+      },
+    },
+  };
+
   return (
     <main className="px-8 py-6">
       {/* Header */}
@@ -107,58 +321,14 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Placeholder for Chart - in a real app you would use a chart library */}
-        <div className="h-[280px] bg-gradient-to-b from-[#4379EE]/10 to-white rounded-lg border border-[#EAEAEA] flex items-center justify-center relative">
-          <div className="text-center">
-            <span className="text-[#4880FF] font-bold bg-[#4880FF]/10 px-3 py-1 rounded-md absolute top-4 right-4">
-              $64,366.77
-            </span>
-            <div className="w-full h-[180px] relative">
-              {/* Chart line path representation */}
-              <div className="w-full h-[1px] bg-[#EAEAEA] absolute top-1/4"></div>
-              <div className="w-full h-[1px] bg-[#EAEAEA] absolute top-2/4"></div>
-              <div className="w-full h-[1px] bg-[#EAEAEA] absolute top-3/4"></div>
-              <div className="w-full h-[1px] bg-[#EAEAEA] absolute bottom-0"></div>
-              <div className="w-full h-[1px] bg-[#EAEAEA] absolute top-0"></div>
-
-              {/* Path representation */}
-              <svg className="absolute inset-0 w-full h-full">
-                <path
-                  d="M 50,150 Q 100,50 150,100 T 250,80 T 350,120 T 450,70 T 550,90"
-                  fill="none"
-                  stroke="#4379EE"
-                  strokeWidth="2"
-                  className="sales-chart-line"
-                />
-              </svg>
-
-              {/* Data points */}
-              {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((pos) => (
-                <div
-                  key={pos}
-                  className="absolute w-2 h-2 rounded-full bg-[#4379EE] border-2 border-white"
-                  style={{
-                    left: `${pos}%`,
-                    bottom: `${40 + Math.sin(pos / 15) * 30}px`,
-                  }}
-                ></div>
-              ))}
-              <div
-                className="absolute w-3 h-3 rounded-full bg-[#4880FF] border-2 border-white shadow-md"
-                style={{ left: "50%", bottom: "70px" }}
-              ></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Y-axis labels */}
-        <div className="flex text-xs text-[rgba(43,48,52,0.4)] font-semibold justify-between mt-2">
-          <span>0%</span>
-          <span>20%</span>
-          <span>40%</span>
-          <span>60%</span>
-          <span>80%</span>
-          <span>100%</span>
+        {/* Chart Implementation */}
+        <div className="relative h-[300px]">
+          <Line
+            data={salesChartData}
+            options={salesChartOptions}
+            plugins={[topSalesPlugin]}
+            className="chart-animation"
+          />
         </div>
       </div>
 
