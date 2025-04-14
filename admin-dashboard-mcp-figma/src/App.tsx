@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import "./assets/styles/dashboard.css";
 import "./assets/styles/inbox.css";
@@ -9,13 +15,20 @@ import "./assets/styles/todo.css";
 import "./assets/styles/contact.css";
 import "./assets/styles/invoice.css";
 
-// Layout Components
-import Sidebar from "./components/layout/Sidebar";
-import Navbar from "./components/layout/Navbar";
+// Auth Provider
+import { AuthProvider } from "./contexts/AuthContext";
+
+// Auth Components
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import LoginPage from "./pages/LoginPage";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
+
+// Layout
+import DashboardLayout from "./components/layout/DashboardLayout";
 
 // Pages
-import ProductStock from "./pages/ProductStock";
 import Dashboard from "./pages/Dashboard";
+import ProductStock from "./pages/ProductStock";
 import ProductUI from "./pages/ProductUI";
 import InboxPage from "./pages/InboxPage";
 import OrderLists from "./pages/OrderLists";
@@ -31,54 +44,44 @@ import TeamPage from "./pages/TeamPage";
 /**
  * Main App Component
  *
- * This is the root component that sets up the application layout
- * and handles global state and navigation
+ * This is the root component that sets up routing and authentication
  */
 const App: React.FC = () => {
-  // State to track active path for navigation
-  const [activePath, setActivePath] = useState("/dashboard");
-
-  // Handle navigation
-  const handleNavigation = (path: string) => {
-    setActivePath(path);
-    // Handle logout logic if needed
-    if (path === "/logout") {
-      // Logout logic here
-      console.log("Logging out...");
-    }
-  };
-
   return (
-    <div className="App flex h-screen bg-[#f5f6fa]">
-      {/* Sidebar */}
-      <Sidebar
-        logoText="DashStack"
-        activePath={activePath}
-        onNavigate={handleNavigation}
-      />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-      <div className="flex-1 flex flex-col overflow-hidden ml-[260px]">
-        {/* Navbar */}
-        <Navbar />
+          {/* Protected routes with DashboardLayout */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<DashboardLayout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/product-stock" element={<ProductStock />} />
+              <Route path="/products" element={<ProductUI />} />
+              <Route path="/inbox" element={<InboxPage />} />
+              <Route path="/order-lists" element={<OrderLists />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/todo" element={<TodoPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/invoice" element={<InvoicePage />} />
+              <Route path="/ui-elements" element={<ElementsUI />} />
+              <Route path="/table" element={<Table />} />
+              <Route path="/team" element={<TeamPage />} />
+            </Route>
+          </Route>
 
-        {/* Main Content */}
-        <div className="flex-1 overflow-y-auto">
-          {activePath === "/dashboard" && <Dashboard />}
-          {activePath === "/product-stock" && <ProductStock />}
-          {activePath === "/products" && <ProductUI />}
-          {activePath === "/inbox" && <InboxPage />}
-          {activePath === "/order-lists" && <OrderLists />}
-          {activePath === "/pricing" && <PricingPage />}
-          {activePath === "/calendar" && <Calendar />}
-          {activePath === "/todo" && <TodoPage />}
-          {activePath === "/contact" && <ContactPage />}
-          {activePath === "/invoice" && <InvoicePage />}
-          {activePath === "/ui-elements" && <ElementsUI />}
-          {activePath === "/table" && <Table />}
-          {activePath === "/team" && <TeamPage />}
-        </div>
-      </div>
-    </div>
+          {/* Redirect root to dashboard */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+          {/* Catch-all route - redirect to dashboard */}
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 

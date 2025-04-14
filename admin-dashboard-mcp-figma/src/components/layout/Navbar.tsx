@@ -1,15 +1,43 @@
-import { FiBell, FiSearch, FiChevronDown, FiMenu } from "react-icons/fi";
-import profilePic from "../../assets/images/people/profile-pic.png";
+import React, { useState } from "react";
+import {
+  FiBell,
+  FiSearch,
+  FiChevronDown,
+  FiMenu,
+  FiLogOut,
+  FiUser,
+  FiSettings,
+} from "react-icons/fi";
 import englishIcon from "../../assets/icons/english-flag.svg";
+import defaultAvatar from "../../assets/images/people/profile-pic.png";
 
-// Mock user data - in a real app, this would come from authentication
-const userData = {
-  userName: "Moni Roy",
-  userRole: "Admin",
-  notifications: 6,
-};
+interface NavbarProps {
+  userName?: string;
+  userAvatar?: string;
+  onLogout?: () => void;
+}
 
-const Navbar = () => {
+const Navbar: React.FC<NavbarProps> = ({
+  userName = "User",
+  userAvatar = defaultAvatar,
+  onLogout,
+}) => {
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  // Mock data - in a real app, these would be dynamic
+  const notifications = 6;
+  const userRole = "Admin";
+
+  const toggleUserMenu = () => {
+    setUserMenuOpen(!userMenuOpen);
+  };
+
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout();
+    }
+  };
+
   return (
     <div className="h-16 flex items-center justify-between px-8 py-4 border-b border-divider-color bg-white shadow-sm z-10">
       {/* Left area - Search */}
@@ -38,9 +66,9 @@ const Navbar = () => {
             <button className="text-primary-text p-2 rounded-full hover:bg-[#F5F7FB] transition-colors">
               <FiBell className="text-xl" />
             </button>
-            {userData.notifications > 0 && (
+            {notifications > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center bg-[#F93C65] text-white text-xs rounded-full">
-                {userData.notifications > 9 ? "9+" : userData.notifications}
+                {notifications > 9 ? "9+" : notifications}
               </span>
             )}
           </div>
@@ -62,23 +90,49 @@ const Navbar = () => {
         </div>
 
         {/* User info */}
-        <div className="flex items-center">
-          <div className="w-10 h-10 rounded-full mr-3 overflow-hidden">
-            <img
-              src={profilePic}
-              alt={userData.userName}
-              className="w-full h-full object-cover"
-            />
+        <div className="relative">
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={toggleUserMenu}
+          >
+            <div className="w-10 h-10 rounded-full mr-3 overflow-hidden">
+              <img
+                src={userAvatar}
+                alt={userName}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to default avatar if image fails to load
+                  (e.target as HTMLImageElement).src = defaultAvatar;
+                }}
+              />
+            </div>
+            <div className="hidden md:block">
+              <p className="text-[#404040] font-semibold text-sm">{userName}</p>
+              <p className="text-[#565656] text-xs">{userRole}</p>
+            </div>
+            <span className="flex items-center ml-2">
+              <FiChevronDown className="text-[#5C5C5C]" />
+            </span>
           </div>
-          <div className="hidden md:block">
-            <p className="text-[#404040] font-semibold text-sm">
-              {userData.userName}
-            </p>
-            <p className="text-[#565656] text-xs">{userData.userRole}</p>
-          </div>
-          <span className="flex items-center ml-2">
-            <FiChevronDown className="text-[#5C5C5C]" />
-          </span>
+
+          {/* User dropdown menu */}
+          {userMenuOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <FiUser className="inline mr-2" /> Profile
+              </button>
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <FiSettings className="inline mr-2" /> Settings
+              </button>
+              <div className="border-t border-gray-200 my-1"></div>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+              >
+                <FiLogOut className="inline mr-2" /> Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

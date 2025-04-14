@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   FiHome,
   FiBox,
@@ -23,6 +24,7 @@ interface SidebarProps {
   logoText: string;
   activePath?: string;
   onNavigate?: (path: string, isLogout?: boolean) => void;
+  onLogout?: () => void;
 }
 
 /**
@@ -33,12 +35,17 @@ interface SidebarProps {
  * @param {string} logoText - Text to display in the logo area
  * @param {string} activePath - Optional currently active path to highlight
  * @param {function} onNavigate - Optional callback when navigation item is clicked
+ * @param {function} onLogout - Optional callback to handle logout
  */
 const Sidebar: React.FC<SidebarProps> = ({
   logoText,
-  activePath = "/dashboard",
+  activePath,
   onNavigate,
+  onLogout,
 }) => {
+  const location = useLocation();
+  const currentPath = activePath || location.pathname;
+
   // Navigation data structure
   const navSections: NavSection[] = [
     {
@@ -46,28 +53,28 @@ const Sidebar: React.FC<SidebarProps> = ({
         {
           name: "Dashboard",
           path: "/dashboard",
-          isActive: activePath === "/dashboard",
+          isActive: currentPath === "/dashboard",
         },
         {
           name: "Products",
           path: "/products",
-          isActive: activePath === "/products",
+          isActive: currentPath === "/products",
         },
         {
           name: "Favorites",
           path: "/favorites",
-          isActive: activePath === "/favorites",
+          isActive: currentPath === "/favorites",
         },
-        { name: "Inbox", path: "/inbox", isActive: activePath === "/inbox" },
+        { name: "Inbox", path: "/inbox", isActive: currentPath === "/inbox" },
         {
           name: "Order Lists",
           path: "/order-lists",
-          isActive: activePath === "/order-lists",
+          isActive: currentPath === "/order-lists",
         },
         {
           name: "Product Stock",
           path: "/product-stock",
-          isActive: activePath === "/product-stock",
+          isActive: currentPath === "/product-stock",
         },
       ],
     },
@@ -76,32 +83,32 @@ const Sidebar: React.FC<SidebarProps> = ({
         {
           name: "Pricing",
           path: "/pricing",
-          isActive: activePath === "/pricing",
+          isActive: currentPath === "/pricing",
         },
         {
           name: "Calendar",
           path: "/calendar",
-          isActive: activePath === "/calendar",
+          isActive: currentPath === "/calendar",
         },
 
-        { name: "To-Do", path: "/todo", isActive: activePath === "/todo" },
+        { name: "To-Do", path: "/todo", isActive: currentPath === "/todo" },
         {
           name: "Contact",
           path: "/contact",
-          isActive: activePath === "/contact",
+          isActive: currentPath === "/contact",
         },
         {
           name: "Invoice",
           path: "/invoice",
-          isActive: activePath === "/invoice",
+          isActive: currentPath === "/invoice",
         },
         {
           name: "UI Elements",
           path: "/ui-elements",
-          isActive: activePath === "/ui-elements",
+          isActive: currentPath === "/ui-elements",
         },
-        { name: "Team", path: "/team", isActive: activePath === "/team" },
-        { name: "Table", path: "/table", isActive: activePath === "/table" },
+        { name: "Team", path: "/team", isActive: currentPath === "/team" },
+        { name: "Table", path: "/table", isActive: currentPath === "/table" },
       ],
     },
     {
@@ -109,9 +116,9 @@ const Sidebar: React.FC<SidebarProps> = ({
         {
           name: "Settings",
           path: "/settings",
-          isActive: activePath === "/settings",
+          isActive: currentPath === "/settings",
         },
-        { name: "Logout", path: "/logout", isActive: activePath === "/logout" },
+        { name: "Logout", path: "/logout", isActive: false },
       ],
     },
   ];
@@ -158,10 +165,19 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   // Handle navigation item click
   const handleNavClick = (path: string) => {
+    // Special case for logout
+    if (path === "/logout") {
+      if (onLogout) {
+        onLogout();
+      } else if (onNavigate) {
+        onNavigate(path, true);
+      }
+      return;
+    }
+
+    // Regular navigation
     if (onNavigate) {
-      // Check if this is a logout action
-      const isLogout = path === "/logout";
-      onNavigate(path, isLogout);
+      onNavigate(path);
     }
   };
 
@@ -186,23 +202,34 @@ const Sidebar: React.FC<SidebarProps> = ({
             <ul className="list-none mb-[5px]">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex}>
-                  <a
-                    href="#"
-                    className={`flex items-center py-3 px-[25px] text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors ${
-                      item.isActive
-                        ? "bg-primary text-white relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary"
-                        : ""
-                    }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.path);
-                    }}
-                  >
-                    <i className="mr-[10px] text-base flex items-center justify-center opacity-80 w-5">
-                      {getIconForNav(item.name)}
-                    </i>
-                    <span>{item.name}</span>
-                  </a>
+                  {item.path === "/logout" ? (
+                    <button
+                      className="flex items-center w-full py-3 px-[25px] text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors hover:bg-gray-100"
+                      onClick={() => handleNavClick(item.path)}
+                    >
+                      <i className="mr-[10px] text-base flex items-center justify-center opacity-80 w-5">
+                        {getIconForNav(item.name)}
+                      </i>
+                      <span>{item.name}</span>
+                    </button>
+                  ) : (
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }: { isActive: boolean }) =>
+                        `flex items-center py-3 px-[25px] text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors ${
+                          isActive
+                            ? "bg-primary text-white relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary"
+                            : "hover:bg-gray-100"
+                        }`
+                      }
+                      onClick={() => handleNavClick(item.path)}
+                    >
+                      <i className="mr-[10px] text-base flex items-center justify-center opacity-80 w-5">
+                        {getIconForNav(item.name)}
+                      </i>
+                      <span>{item.name}</span>
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </ul>

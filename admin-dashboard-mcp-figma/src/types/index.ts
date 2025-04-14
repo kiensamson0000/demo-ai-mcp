@@ -9,15 +9,24 @@ export interface Product {
   colors: string[];
 }
 
-// Navigation item type
+/**
+ * Navigation item interface for sidebar
+ */
 export interface NavItem {
   name: string;
   path: string;
-  isActive?: boolean;
+  isActive: boolean;
 }
 
-// Navigation section with items
+/**
+ * Navigation section interface for sidebar
+ */
 export interface NavSection {
   title?: string;
   items: NavItem[];
 }
+
+/**
+ * User role type
+ */
+export type UserRole = "admin" | "user";
