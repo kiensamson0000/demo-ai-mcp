@@ -7,6 +7,7 @@ import "./styles/pricing.css";
 import "./styles/calendar.css";
 import "./styles/todo.css";
 import "./styles/contact.css";
+import "./styles/invoice.css";
 
 // Layout Components
 import Sidebar from "./components/layout/Sidebar";
@@ -22,6 +23,7 @@ import PricingPage from "./pages/PricingPage";
 import Calendar from "./pages/Calendar";
 import TodoPage from "./pages/TodoPage";
 import ContactPage from "./pages/ContactPage";
+import InvoicePage from "./pages/InvoicePage";
 
 // Import profile image
 // import profilePic from "./assets/profile-pic.png";
@@ -70,6 +72,7 @@ const App: React.FC = () => {
           {activePath === "/calendar" && <Calendar />}
           {activePath === "/todo" && <TodoPage />}
           {activePath === "/contact" && <ContactPage />}
+          {activePath === "/invoice" && <InvoicePage />}
         </div>
       </div>
     </div>

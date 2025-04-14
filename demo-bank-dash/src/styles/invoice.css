@@ -1,0 +1,50 @@
+/* Invoice Page Styles */
+
+/* Table styles */
+.invoice-table th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.invoice-table th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.invoice-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Button styles */
+.print-button {
+  transition: all 0.2s ease;
+}
+
+.print-button:hover {
+  background-color: #f0f2f5;
+}
+
+.send-button {
+  transition: all 0.2s ease;
+}
+
+.send-button:hover {
+  background-color: #3668d8;
+}
+
+.send-button .icon-container {
+  transition: all 0.2s ease;
+}
+
+.send-button:hover .icon-container {
+  background-color: #5a8bf9;
+}
+
+/* Card hover effect */
+.invoice-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.invoice-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
