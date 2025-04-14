@@ -25,14 +25,12 @@ import {
   TooltipItem,
   ScriptableContext,
   Plugin,
+  BarElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import appleWatch from "../assets/images/products/apple-watch.png";
 import microsoftHeadset from "../assets/images/products/microsoft-headset.png";
 import samsungA50 from "../assets/images/products/samsung-A50.png";
-import beatsHeadphones from "../assets/images/products/microsoft-headset.png";
-import salesAnalyticsSvg from "../assets/icons/sales-analytics.svg";
-import revenueChartSvg from "../assets/icons/revenue-chart.svg";
 import customerChartSvg from "../assets/icons/customer-chart.svg";
 
 // Register Chart.js components
@@ -41,6 +39,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Filler,
@@ -50,6 +49,39 @@ ChartJS.register(
 // Define chart types
 type SalesChartData = ChartData<"line">;
 type SalesChartOptions = ChartOptions<"line">;
+
+const labels = [
+  "5000",
+  "10000",
+  "15000",
+  "20000",
+  "25000",
+  "30000",
+  "35000",
+  "40000",
+  "45000",
+  "50000",
+  "55000",
+  "60000",
+];
+const salesData = [25, 30, 30, 32, 55, 40, 88, 40, 65, 45, 55, 30];
+const profitData = [30, 70, 40, 30, 50, 50, 45, 55, 40, 35, 90, 60];
+
+// Sample data matching the chart in the image
+const years = [
+  "2015",
+  "2015.5",
+  "2016",
+  "2016.5",
+  "2017",
+  "2017.5",
+  "2018",
+  "2018.5",
+  "2019",
+  "2019.5",
+];
+const blueLineData = [25, 42, 55, 68, 70, 55, 45, 50, 60, 75, 85, 95];
+const greenLineData = [0, 25, 42, 55, 58, 42, 30, 25, 35, 48, 62, 85];
 
 // Add a custom plugin for the top sales indicator
 const topSalesPlugin: Plugin<"line"> = {
@@ -90,6 +122,9 @@ const topSalesPlugin: Plugin<"line"> = {
 const Dashboard: React.FC = () => {
   // State for selected month
   const [selectedMonth, setSelectedMonth] = React.useState<string>("October");
+
+  // State for Revenue chart month
+  const [revenueMonth, setRevenueMonth] = React.useState<string>("October");
 
   // Monthly sales data
   const monthlySalesData: Record<
@@ -323,6 +358,244 @@ const Dashboard: React.FC = () => {
     },
   };
 
+  // Revenue chart data
+  const revenueData = {
+    labels,
+    datasets: [
+      {
+        label: "Profit",
+        data: profitData,
+        borderWidth: 1.5,
+        borderColor: "#A370F7",
+        backgroundColor: function (context: ScriptableContext<"line">) {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
+          if (!chartArea) {
+            return;
+          }
+          const gradient = ctx.createLinearGradient(
+            0,
+            chartArea.top,
+            0,
+            chartArea.bottom
+          );
+          gradient.addColorStop(0, "rgba(193, 154, 254, 0.8)");
+          gradient.addColorStop(1, "rgba(193, 154, 254, 0.1)");
+          return gradient;
+        },
+        fill: true,
+      },
+      {
+        label: "Sales",
+        data: salesData,
+        borderWidth: 1.5,
+        borderColor: "#FF7A5C",
+        backgroundColor: function (context: ScriptableContext<"line">) {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
+          if (!chartArea) {
+            return;
+          }
+          const gradient = ctx.createLinearGradient(
+            0,
+            chartArea.top,
+            0,
+            chartArea.bottom
+          );
+          gradient.addColorStop(0, "rgba(255, 159, 138, 0.8)");
+          gradient.addColorStop(1, "rgba(255, 159, 138, 0.1)");
+          return gradient;
+        },
+        fill: true,
+      },
+    ],
+  };
+
+  // Revenue chart options
+  const revenueOptions: ChartOptions<"line"> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          stepSize: 20,
+          color: "#9CA3AF",
+          font: {
+            size: 12,
+          },
+        },
+        grid: {
+          color: "#f0f0f0",
+        },
+        border: {
+          display: false,
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#9CA3AF",
+          font: {
+            size: 12,
+          },
+        },
+        border: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false, // We'll create our own legend
+      },
+      tooltip: {
+        backgroundColor: "white",
+        titleColor: "#4B5563",
+        bodyColor: "#4B5563",
+        borderColor: "#E5E7EB",
+        borderWidth: 1,
+        padding: 12,
+        cornerRadius: 4,
+        displayColors: true,
+        boxPadding: 4,
+        callbacks: {
+          labelColor: function (context) {
+            const colors = ["#FF7A5C", "#A370F7"];
+            return {
+              backgroundColor: colors[context.datasetIndex],
+              borderColor: colors[context.datasetIndex],
+            };
+          },
+        },
+      },
+    },
+    elements: {
+      line: {
+        tension: 0.4, // Makes the line curved
+      },
+      point: {
+        radius: 0, // Hide points
+        hoverRadius: 6, // Show on hover
+      },
+    },
+    interaction: {
+      mode: "index",
+      intersect: false,
+    },
+  };
+
+  // Sales Analytics data
+  const salesAnalyticsData = {
+    labels: years,
+    datasets: [
+      {
+        label: "Data 1",
+        data: blueLineData,
+        borderColor: "#3B82F6", // Blue line
+        backgroundColor: "transparent",
+        tension: 0.4, // Curve smoothness
+        pointRadius: 4,
+        pointBackgroundColor: "#3B82F6",
+        pointBorderColor: "white",
+        pointBorderWidth: 2,
+      },
+      {
+        label: "Data 2",
+        data: greenLineData,
+        borderColor: "#10B981", // Green line
+        backgroundColor: "transparent",
+        tension: 0.4, // Curve smoothness
+        pointRadius: 4,
+        pointBackgroundColor: "#10B981",
+        pointBorderColor: "white",
+        pointBorderWidth: 2,
+      },
+    ],
+  };
+
+  // Sales Analytics options
+  const salesAnalyticsOptions: ChartOptions<"line"> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          stepSize: 25,
+          color: "#9CA3AF",
+          font: {
+            size: 12,
+          },
+          padding: 10,
+        },
+        grid: {
+          color: "#F3F4F6",
+        },
+        border: {
+          display: false,
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#9CA3AF",
+          font: {
+            size: 12,
+          },
+          maxRotation: 0,
+          padding: 10,
+          callback: function (val: string | number) {
+            // Only display full years, not half years
+            const label = this.getLabelForValue(Number(val));
+            return label.includes(".5") ? "" : label;
+          },
+        },
+        border: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false, // Hide default legend
+      },
+      tooltip: {
+        backgroundColor: "white",
+        titleColor: "#1F2937",
+        bodyColor: "#4B5563",
+        borderColor: "#E5E7EB",
+        borderWidth: 1,
+        padding: 12,
+        cornerRadius: 6,
+        displayColors: true,
+        boxPadding: 6,
+        callbacks: {
+          title: function (tooltipItems) {
+            return tooltipItems[0].label.includes(".5")
+              ? `Mid ${Math.floor(parseFloat(tooltipItems[0].label))}`
+              : tooltipItems[0].label;
+          },
+        },
+      },
+    },
+    interaction: {
+      mode: "index",
+      intersect: false,
+    },
+    elements: {
+      line: {
+        borderWidth: 3,
+      },
+    },
+  };
+
   // Handle month selection
   const handleMonthChange = (month: string) => {
     setSelectedMonth(month);
@@ -354,7 +627,7 @@ const Dashboard: React.FC = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 stats-grid">
         {/* Total Users */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 relative overflow-hidden card-hover">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#8280FF]/20 flex items-center justify-center">
             <FiUsers className="text-[#8280FF] text-xl" />
           </div>
@@ -371,7 +644,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Total Order */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 relative overflow-hidden card-hover">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#FEC53D]/20 flex items-center justify-center">
             <FiShoppingBag className="text-[#FEC53D] text-xl" />
           </div>
@@ -388,7 +661,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Total Sales */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 relative overflow-hidden card-hover">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#4AD991]/20 flex items-center justify-center">
             <FiDollarSign className="text-[#4AD991] text-xl" />
           </div>
@@ -405,7 +678,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Total Pending */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 relative overflow-hidden card-hover">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#FF9066]/30 flex items-center justify-center">
             <FiPackage className="text-[#FF9066] text-xl" />
           </div>
@@ -423,7 +696,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Sales Details Chart */}
-      <div className="bg-white rounded-[14px] shadow-md p-6 card-hover">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 card-hover">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[#202224]">Sales Details</h2>
           <div className="relative">
@@ -472,7 +745,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Deals Details Table */}
-      <div className="bg-white rounded-[14px] shadow-md p-6 card-hover mt-6">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 card-hover mt-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[#202224]">Deals Details</h2>
           <div className="border border-[#D5D5D5] rounded px-3 py-1 flex items-center text-sm text-[rgba(43,48,52,0.4)]">
@@ -573,57 +846,66 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Revenue Chart */}
-      <div className="bg-white rounded-[14px] shadow-md p-6 card-hover mt-6">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 card-hover mt-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[#202224]">Revenue</h2>
-          <div className="border border-[#D5D5D5] rounded px-3 py-1 flex items-center text-sm text-[rgba(43,48,52,0.4)]">
-            <span>October</span>
-            <FiChevronDown className="ml-2" />
+          <div className="relative">
+            <div
+              className="border border-[#D5D5D5] rounded px-3 py-1 flex items-center text-sm text-[rgba(43,48,52,0.4)] cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById("revenueMonthDropdown")
+                  ?.classList.toggle("hidden")
+              }
+            >
+              <span>{revenueMonth}</span>
+              <FiChevronDown className="ml-2" />
+            </div>
+            <div
+              id="revenueMonthDropdown"
+              className="absolute right-0 mt-1 bg-white border border-[#D5D5D5] rounded shadow-md z-10 hidden"
+            >
+              {months.map((month) => (
+                <div
+                  key={month}
+                  className="px-4 py-2 hover:bg-[#F5F6FA] text-sm cursor-pointer text-[rgba(43,48,52,0.8)]"
+                  onClick={() => {
+                    setRevenueMonth(month);
+                    document
+                      .getElementById("revenueMonthDropdown")
+                      ?.classList.add("hidden");
+                  }}
+                >
+                  {month}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center mb-4 space-x-6">
+        <div className="h-[250px] relative">
+          <Line
+            data={revenueData}
+            options={revenueOptions}
+            className="chart-animation"
+          />
+        </div>
+
+        <div className="flex justify-center mb-4 mt-8 space-x-6">
           <div className="flex items-center">
             <div className="w-3 h-3 rounded-full bg-[#E3B9FF] mr-2"></div>
             <span className="text-[#282D32] font-bold">Profit</span>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center pl-8">
             <div className="w-3 h-3 rounded-full bg-[#F9978A] mr-2"></div>
             <span className="text-[#282D32] font-bold">Sales</span>
           </div>
         </div>
-
-        <div className="revenue-chart relative h-[250px]">
-          {/* Revenue Chart SVG */}
-          <img
-            src={revenueChartSvg}
-            alt="Revenue Chart"
-            className="w-full h-full"
-          />
-
-          {/* Y-axis Labels */}
-          <div className="absolute left-0 top-0 h-full flex flex-col justify-between py-2 text-xs text-[rgba(43,48,52,0.4)] font-semibold">
-            <span>60k</span>
-            <span>55k</span>
-            <span>50k</span>
-            <span>45k</span>
-            <span>40k</span>
-          </div>
-
-          {/* X-axis Labels */}
-          <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-[rgba(43,48,52,0.4)] font-semibold">
-            <span>20</span>
-            <span>40</span>
-            <span>60</span>
-            <span>80</span>
-            <span>100</span>
-          </div>
-        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6 ">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6">
         {/* Customers Card */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 card-hover">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 card-hover">
           <h2 className="text-2xl font-bold text-[#202224] mb-6">Customers</h2>
 
           <div className="flex justify-center mb-6">
@@ -664,14 +946,14 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Featured Product Card */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 card-hover relative">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 card-hover relative">
           <h2 className="text-2xl font-bold text-[#202224] mb-6">
             Featured Product
           </h2>
 
           <div className="flex justify-center mb-4">
             <img
-              src={beatsHeadphones}
+              src={microsoftHeadset}
               alt="Beats Headphone"
               className="w-40 h-40 object-contain"
             />
@@ -686,46 +968,27 @@ const Dashboard: React.FC = () => {
 
           {/* Navigation Arrows */}
           <div className="absolute right-6 top-6 flex space-x-2">
-            <button className="nav-arrow">
-              <FiChevronLeft className="nav-arrow-icon" />
+            <button className="w-8 h-8 rounded-full bg-[#E2EAF8]/40 flex items-center justify-center">
+              <FiChevronLeft className="text-[#626262]" />
             </button>
-            <button className="nav-arrow">
-              <FiChevronRight className="nav-arrow-icon" />
+            <button className="w-8 h-8 rounded-full bg-[#E2EAF8]/40 flex items-center justify-center">
+              <FiChevronRight className="text-[#626262]" />
             </button>
           </div>
         </div>
 
         {/* Sales Analytics Card */}
-        <div className="bg-white rounded-[14px] shadow-md p-6 card-hover">
+        <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 card-hover">
           <h2 className="text-2xl font-bold text-[#202224] mb-6">
             Sales Analytics
           </h2>
 
-          <div className="h-[250px] relative mb-4">
-            {/* Sales Analytics Chart SVG */}
-            <img
-              src={salesAnalyticsSvg}
-              alt="Sales Analytics"
-              className="w-full h-full"
+          <div className="h-[250px] relative">
+            <Line
+              data={salesAnalyticsData}
+              options={salesAnalyticsOptions}
+              className="chart-animation"
             />
-
-            {/* Y-axis Labels */}
-            <div className="absolute right-0 top-0 h-full flex flex-col justify-between text-xs text-[rgba(41,44,47,0.4)] font-semibold">
-              <span>100</span>
-              <span>75</span>
-              <span>50</span>
-              <span>25</span>
-              <span>0</span>
-            </div>
-          </div>
-
-          {/* X-axis Labels */}
-          <div className="flex justify-between text-xs text-[rgba(41,44,47,0.4)] font-semibold px-6">
-            <span>2015</span>
-            <span>2016</span>
-            <span>2017</span>
-            <span>2018</span>
-            <span>2019</span>
           </div>
         </div>
       </div>
