@@ -88,29 +88,110 @@ const topSalesPlugin: Plugin<"line"> = {
 };
 
 const Dashboard: React.FC = () => {
+  // State for selected month
+  const [selectedMonth, setSelectedMonth] = React.useState<string>("October");
+
+  // Monthly sales data
+  const monthlySalesData: Record<
+    string,
+    { values: number[]; quantities: number[] }
+  > = {
+    January: {
+      values: [15, 28, 80, 48, 55, 90, 50, 78, 84, 90, 94, 98],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    February: {
+      values: [10, 24, 65, 45, 80, 60, 45, 75, 95, 88, 55, 96],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    March: {
+      values: [18, 30, 55, 80, 65, 95, 35, 25, 89, 97, 75, 65],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    April: {
+      values: [12, 25, 85, 90, 95, 25, 30, 55, 95, 65, 98, 85],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    May: {
+      values: [20, 32, 42, 52, 60, 68, 75, 82, 88, 93, 96, 99],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    June: {
+      values: [14, 26, 36, 46, 54, 63, 70, 78, 85, 90, 94, 98],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    July: {
+      values: [22, 34, 44, 54, 62, 70, 78, 85, 90, 94, 97, 100],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    August: {
+      values: [16, 28, 38, 48, 56, 65, 72, 80, 86, 91, 95, 98],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    September: {
+      values: [25, 38, 48, 58, 66, 74, 81, 87, 92, 95, 98, 100],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    October: {
+      values: [35, 65, 85, 55, 90, 85, 55, 95, 55, 75, 95, 100],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    November: {
+      values: [18, 30, 40, 50, 58, 66, 74, 81, 87, 92, 95, 98],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+    December: {
+      values: [22, 35, 45, 55, 64, 72, 80, 86, 91, 95, 98, 100],
+      quantities: [
+        5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000,
+        55000, 60000,
+      ],
+    },
+  };
+
+  // Current month's data
+  const currentMonthData = monthlySalesData[selectedMonth];
+
   // Chart data configuration
   const salesChartData: SalesChartData = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
+    labels: currentMonthData.quantities.map((q) => `${q}`),
     datasets: [
       {
-        label: "Sales",
-        data: [
-          30000, 35000, 25000, 45000, 55000, 40000, 60000, 45000, 35000, 50000,
-          45000, 60000,
-        ],
+        label: "Sales %",
+        data: currentMonthData.values,
         borderColor: "#4379EE",
         borderWidth: 1.5,
         pointBackgroundColor: "#4379EE",
@@ -154,8 +235,11 @@ const Dashboard: React.FC = () => {
         padding: 10,
         displayColors: false,
         callbacks: {
+          title: function (tooltipItems) {
+            return `Sales: ${tooltipItems[0].label}`;
+          },
           label: function (context: TooltipItem<"line">) {
-            return `$${context.parsed.y.toLocaleString()}`;
+            return `${context.parsed.y}%`;
           },
         },
         // Add custom tooltip styling
@@ -183,6 +267,10 @@ const Dashboard: React.FC = () => {
             size: 12,
             weight: "bold",
           },
+          callback: function (value, index) {
+            // Show fewer labels to avoid crowding
+            return index % 2 === 0 ? currentMonthData.quantities[index] : "";
+          },
         },
         border: {
           display: false,
@@ -205,13 +293,15 @@ const Dashboard: React.FC = () => {
             weight: "bold",
           },
           callback: function (value) {
-            return value >= 1000 ? `${value / 1000}k` : value;
+            if (typeof value === "number") {
+              return `${value}%`;
+            }
+            return value;
           },
           padding: 10,
         },
         min: 0,
-        max: 70000,
-        stepSize: 10000,
+        max: 100,
       },
     },
     layout: {
@@ -232,6 +322,27 @@ const Dashboard: React.FC = () => {
       },
     },
   };
+
+  // Handle month selection
+  const handleMonthChange = (month: string) => {
+    setSelectedMonth(month);
+  };
+
+  // List of all months for dropdown
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
     <main className="px-8 py-6">
@@ -315,14 +426,42 @@ const Dashboard: React.FC = () => {
       <div className="bg-white rounded-[14px] shadow-md p-6 card-hover">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[#202224]">Sales Details</h2>
-          <div className="border border-[#D5D5D5] rounded px-3 py-1 flex items-center text-sm text-[rgba(43,48,52,0.4)]">
-            <span>October</span>
-            <FiChevronDown className="ml-2" />
+          <div className="relative">
+            <div
+              className="border border-[#D5D5D5] rounded px-3 py-1 flex items-center text-sm text-[rgba(43,48,52,0.4)] cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById("monthDropdown")
+                  ?.classList.toggle("hidden")
+              }
+            >
+              <span>{selectedMonth}</span>
+              <FiChevronDown className="ml-2" />
+            </div>
+            <div
+              id="monthDropdown"
+              className="absolute right-0 mt-1 bg-white border border-[#D5D5D5] rounded shadow-md z-10 hidden"
+            >
+              {months.map((month) => (
+                <div
+                  key={month}
+                  className="px-4 py-2 hover:bg-[#F5F6FA] text-sm cursor-pointer text-[rgba(43,48,52,0.8)]"
+                  onClick={() => {
+                    handleMonthChange(month);
+                    document
+                      .getElementById("monthDropdown")
+                      ?.classList.add("hidden");
+                  }}
+                >
+                  {month}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Chart Implementation */}
-        <div className="relative h-[300px]">
+        <div className="h-[300px] relative">
           <Line
             data={salesChartData}
             options={salesChartOptions}
