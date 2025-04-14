@@ -26,6 +26,7 @@ import ContactPage from "./pages/ContactPage";
 import InvoicePage from "./pages/InvoicePage";
 import ElementsUI from "./pages/ElementsUI";
 import Table from "./pages/Table";
+import TeamPage from "./pages/TeamPage";
 
 /**
  * Main App Component
@@ -74,6 +75,7 @@ const App: React.FC = () => {
           {activePath === "/invoice" && <InvoicePage />}
           {activePath === "/ui-elements" && <ElementsUI />}
           {activePath === "/table" && <Table />}
+          {activePath === "/team" && <TeamPage />}
         </div>
       </div>
     </div>
