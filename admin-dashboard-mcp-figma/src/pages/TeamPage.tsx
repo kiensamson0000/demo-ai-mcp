@@ -21,7 +21,7 @@ interface TeamMember {
 }
 
 export default function TeamPage() {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
+  const [teamMembers, _setTeamMembers] = useState<TeamMember[]>([
     {
       id: 1,
       name: "Jason Price",
@@ -108,7 +108,7 @@ export default function TeamPage() {
     },
   ]);
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, _setSearchTerm] = useState("");
 
   const filteredMembers = teamMembers.filter(
     (member) =>
