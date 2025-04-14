@@ -10,13 +10,13 @@ import {
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
-import appleWatch from "../assets/apple-watch.png";
-import microsoftHeadset from "../assets/microsoft-headset.png";
-import samsungA50 from "../assets/samsung-A50.png";
-import beatsHeadphones from "../assets/microsoft-headset.png";
-import salesAnalyticsSvg from "../assets/figma/sales-analytics.svg";
-import revenueChartSvg from "../assets/figma/revenue-chart.svg";
-import customerChartSvg from "../assets/figma/customer-chart.svg";
+import appleWatch from "../assets/images/products/apple-watch.png";
+import microsoftHeadset from "../assets/images/products/microsoft-headset.png";
+import samsungA50 from "../assets/images/products/samsung-A50.png";
+import beatsHeadphones from "../assets/images/products/microsoft-headset.png";
+import salesAnalyticsSvg from "../assets/icons/sales-analytics.svg";
+import revenueChartSvg from "../assets/icons/revenue-chart.svg";
+import customerChartSvg from "../assets/icons/customer-chart.svg";
 
 const Dashboard: React.FC = () => {
   return (

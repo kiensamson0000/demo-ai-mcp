@@ -2,11 +2,11 @@ import React from "react";
 import { FiShoppingBag, FiHeart, FiSettings, FiStar } from "react-icons/fi";
 
 // Import product images
-import appleWatch from "../assets/apple-watch.png";
-import microsoftHeadset from "../assets/microsoft-headset.png";
-import camera from "../assets/camera.png";
-import samsungA50 from "../assets/samsung-A50.png";
-import womensDress from "../assets/womens-dress.png";
+import appleWatch from "../assets/images/products/apple-watch.png";
+import microsoftHeadset from "../assets/images/products/microsoft-headset.png";
+import camera from "../assets/images/products/camera.png";
+import samsungA50 from "../assets/images/products/samsung-A50.png";
+import womensDress from "../assets/images/products/womens-dress.png";
 
 // Type definition for product
 interface Product {

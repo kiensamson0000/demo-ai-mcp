@@ -1,6 +1,6 @@
 import { FiBell, FiSearch, FiChevronDown, FiMenu } from "react-icons/fi";
-import profilePic from "../../assets/profile-pic.png";
-import englishIcon from "../../assets/english-flag.svg";
+import profilePic from "../../assets/images/people/profile-pic.png";
+import englishIcon from "../../assets/icons/english-flag.svg";
 
 // Mock user data - in a real app, this would come from authentication
 const userData = {

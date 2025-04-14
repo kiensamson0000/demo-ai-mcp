@@ -1,12 +1,12 @@
 import React from "react";
 
 // Import profile images
-import jasonPrice from "../assets/jason-price.png";
-import duaneDean from "../assets/duane-dean.png";
-import jonathanBarker from "../assets/jonathan-barker.png";
-import rosieGlover from "../assets/rosie-glover.png";
-import patrickGreer from "../assets/patrick-greer.png";
-import darrellOrtega from "../assets/darrell-ortega.png";
+import jasonPrice from "../assets/images/people/jason-price.png";
+import duaneDean from "../assets/images/people/duane-dean.png";
+import jonathanBarker from "../assets/images/people/jonathan-barker.png";
+import rosieGlover from "../assets/images/people/rosie-glover.png";
+import patrickGreer from "../assets/images/people/patrick-greer.png";
+import darrellOrtega from "../assets/images/people/darrell-ortega.png";
 
 interface ContactCardProps {
   name: string;

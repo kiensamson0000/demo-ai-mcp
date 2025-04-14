@@ -25,8 +25,6 @@ import TodoPage from "./pages/TodoPage";
 import ContactPage from "./pages/ContactPage";
 import InvoicePage from "./pages/InvoicePage";
 import ElementsUI from "./pages/ElementsUI";
-// Import profile image
-// import profilePic from "./assets/profile-pic.png";
 
 /**
  * Main App Component

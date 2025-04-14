@@ -2,12 +2,12 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 
 // Import images
-import profilePic1 from "../assets/profilePic1.png";
-import profilePic2 from "../assets/profilePic2.png";
-import profilePic3 from "../assets/profilePic3.png";
-import event1 from "../assets/event1.png";
-import event2 from "../assets/event2.png";
-import event3 from "../assets/event3.png";
+import profilePic1 from "../assets/images/people/profilePic1.png";
+import profilePic2 from "../assets/images/people/profilePic2.png";
+import profilePic3 from "../assets/images/people/profilePic3.png";
+import event1 from "../assets/images/event/event1.png";
+import event2 from "../assets/images/event/event2.png";
+import event3 from "../assets/images/event/event3.png";
 
 // Import SVGs
 // import nextArrow from "../assets/figma/calendar/next-arrow.svg";

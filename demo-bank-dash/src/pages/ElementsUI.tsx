@@ -2,18 +2,18 @@ import React from "react";
 import { FiFilter, FiChevronDown } from "react-icons/fi";
 
 // Import chart images
-import barChart1Svg from "../assets/images/barChart/Bar1.png";
-import barChart2Svg from "../assets/images/barChart/Bar2.png";
-import barChart3Svg from "../assets/images/barChart/Bar3.png";
-import barChart4Svg from "../assets/images/barChart/Bar4.png";
-import pieChart1Svg from "../assets/images/pieChart/Pie1.png";
-import pieChart2Svg from "../assets/images/pieChart/Pie2.png";
-import pieChart3Svg from "../assets/images/pieChart/Pie3.png";
-import pieChart4Svg from "../assets/images/pieChart/Pie4.png";
-import donutChart1Svg from "../assets/images/donutChart/donutChart1.png";
-import donutChart2Svg from "../assets/images/donutChart/donutChart2.png";
-import donutChart3Svg from "../assets/images/donutChart/donutChart3.png";
-import donutChart4Svg from "../assets/images/donutChart/donutChart4.png";
+import barChart1Svg from "../assets/images/charts/barChart/Bar1.png";
+import barChart2Svg from "../assets/images/charts/barChart/Bar2.png";
+import barChart3Svg from "../assets/images/charts/barChart/Bar3.png";
+import barChart4Svg from "../assets/images/charts/barChart/Bar4.png";
+import pieChart1Svg from "../assets/images/charts/pieChart/Pie1.png";
+import pieChart2Svg from "../assets/images/charts/pieChart/Pie2.png";
+import pieChart3Svg from "../assets/images/charts/pieChart/Pie3.png";
+import pieChart4Svg from "../assets/images/charts/pieChart/Pie4.png";
+import donutChart1Svg from "../assets/images/charts/donutChart/donutChart1.png";
+import donutChart2Svg from "../assets/images/charts/donutChart/donutChart2.png";
+import donutChart3Svg from "../assets/images/charts/donutChart/donutChart3.png";
+import donutChart4Svg from "../assets/images/charts/donutChart/donutChart4.png";
 
 const ElementsUI: React.FC = () => {
   return (
