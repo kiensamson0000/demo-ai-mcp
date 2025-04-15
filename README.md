@@ -9,6 +9,7 @@ The Figma MCP Server represents a groundbreaking solution in merging design and 
 - [Introduction](#introduction)
 - [What is Figma MCP?](#what-is-figma-mcp)
 - [How Does Figma MCP Work?](#how-does-figma-mcp-work)
+- [Quickstart Framelink Figma MCP Server](#quickstart-framelink-figma-mcp-server)
 - [Setup and Usage](#setup-and-usage)
   - [Prerequisites](#prerequisites)
   - [Obtaining a Figma API Access Token](#obtaining-a-figma-api-access-token)
@@ -32,12 +33,6 @@ Figma MCP is a server implementation of the Model Context Protocol. Its primary 
 
 ---
 
-## Framelink Figma MCP Server?
-
-[This guide](https://www.framelink.ai/docs/quickstart) will walk you through setting up the Framelink Figma MCP server.
-
----
-
 ## How Does Figma MCP Work?
 
 At its core, the Figma MCP Server performs the following functions:
@@ -48,6 +43,12 @@ At its core, the Figma MCP Server performs the following functions:
 - **Standardized Communication:** Through defined endpoints—such as those for server-sent events (SSE)—the server provides a reliable mechanism for AI assistants to receive up-to-date design information.
 
 This structured approach ensures that AI models obtain accurate, concise, and relevant design context for generating high-fidelity code.
+
+---
+
+## Quickstart Framelink Figma MCP Server?
+
+[This guide](https://www.framelink.ai/docs/quickstart) will walk you through setting up the Framelink Figma MCP server.
 
 ---
 
