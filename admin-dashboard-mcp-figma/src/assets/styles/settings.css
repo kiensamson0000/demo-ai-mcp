@@ -1,84 +1,3 @@
-.settings-page {
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.settings-title {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #202224;
-  margin-bottom: 2rem;
-  letter-spacing: -0.35%;
-}
-
-.settings-form-container {
-  background: #ffffff;
-  border: 0.3px solid #b9b9b9;
-  border-radius: 14px;
-  padding: 2rem;
-}
-
-.settings-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.logo-upload-section h3 {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #4379ee;
-  text-transform: uppercase;
-  letter-spacing: 3.85%;
-  margin-bottom: 1rem;
-}
-
-.logo-upload-area {
-  border: 2px dashed #e2e8f0;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.logo-upload-area:hover {
-  border-color: #4880ff;
-}
-
-.logo-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo-placeholder p {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.875rem;
-  color: #64748b;
-}
-
-.browse-link {
-  color: #4880ff;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.logo-preview {
-  max-width: 200px;
-  margin: 0 auto;
-}
-
-.logo-preview img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
 .hidden-input {
   display: none;
 }
@@ -98,7 +17,7 @@
 
 .form-group input,
 .form-group textarea {
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
   border: 0.6px solid #d5d5d5;
   border-radius: 4px;
   font-family: "Nunito Sans", sans-serif;
@@ -118,43 +37,4 @@
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: #64748b;
-}
-
-.save-button {
-  background-color: #4880ff;
-  color: #ffffff;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1.125rem;
-  font-weight: 700;
-  padding: 0.875rem 2rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 1rem;
-  opacity: 0.9;
-  letter-spacing: -0.36%;
-}
-
-.save-button:hover {
-  background-color: #3b73ff;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 640px) {
-  .settings-page {
-    padding: 1rem;
-  }
-
-  .settings-form-container {
-    padding: 1.5rem;
-  }
-
-  .settings-title {
-    font-size: 1.5rem;
-  }
-
-  .logo-upload-area {
-    padding: 1.5rem;
-  }
 }

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../assets/styles/settings.css";
+import { FaCamera } from "react-icons/fa";
 
 interface SettingsFormData {
   siteName: string;
@@ -21,6 +22,7 @@ const Settings: React.FC = () => {
   });
 
   const [logoPreview, setLogoPreview] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -53,135 +55,124 @@ const Settings: React.FC = () => {
     console.log("Form submitted:", formData);
   };
 
-  return (
-    <div className="settings-page">
-      <h1 className="settings-title">General Settings</h1>
+  const handleUploadLogo = () => {
+    fileInputRef.current?.click();
+  };
 
-      <div className="settings-form-container">
-        <form onSubmit={handleSubmit} className="settings-form">
-          <div className="logo-upload-section">
-            <h3>Upload Logo</h3>
-            <div className="logo-upload-area">
+  return (
+    <main className="px-8 py-6">
+      <h1 className="text-[#202224] text-3xl font-bold mb-8">
+        General Settings
+      </h1>
+
+      <div className="bg-white rounded-xl border border-[#B9B9B9] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.03)] px-40 py-12">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+          <div className="flex flex-col items-center gap-3">
+            <div
+              className="rounded-full bg-[#ECECEE] w-20 h-20 relative"
+              onClick={handleUploadLogo}
+            >
               {logoPreview ? (
-                <div className="logo-preview">
-                  <img src={logoPreview} alt="Logo preview" />
-                </div>
+                <img
+                  src={logoPreview}
+                  alt="Logo preview"
+                  className="w-full h-full object-cover rounded-full"
+                />
               ) : (
-                <div className="logo-placeholder">
-                  <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
-                      stroke="#4880FF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M7 10L12 15L17 10"
-                      stroke="#4880FF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 15V3"
-                      stroke="#4880FF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <p>
-                    Drag and drop your logo here or{" "}
-                    <label htmlFor="logo-upload" className="browse-link">
-                      browse
-                    </label>
-                  </p>
-                </div>
+                <FaCamera className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-2xl" />
               )}
-              <input
-                type="file"
-                id="logo-upload"
-                name="logo"
-                accept="image/*"
-                onChange={handleLogoChange}
-                className="hidden-input"
-              />
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              id="logo-upload"
+              name="logo"
+              accept="image/*"
+              onChange={handleLogoChange}
+              className="hidden-input"
+            />
+            <label
+              htmlFor="logo-upload"
+              className="font-bold text-[#4379EE] text-sm"
+            >
+              Upload Logo
+            </label>
+          </div>
+
+          <div className="grid grid-cols-2 gap-14">
+            <div className="flex flex-col gap-y-8">
+              <div className="form-group">
+                <label htmlFor="siteName">Site Name</label>
+                <input
+                  type="text"
+                  id="siteName"
+                  name="siteName"
+                  value={formData.siteName}
+                  onChange={handleInputChange}
+                  placeholder="Enter site name"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="seoTitle">SEO Title</label>
+                <input
+                  type="text"
+                  id="seoTitle"
+                  name="seoTitle"
+                  value={formData.seoTitle}
+                  onChange={handleInputChange}
+                  placeholder="Enter SEO title"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="seoKeywords">SEO Keywords</label>
+                <input
+                  type="text"
+                  id="seoKeywords"
+                  name="seoKeywords"
+                  value={formData.seoKeywords}
+                  onChange={handleInputChange}
+                  placeholder="Enter SEO keywords"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-y-8">
+              <div className="form-group">
+                <label htmlFor="copyright">Copyright</label>
+                <input
+                  type="text"
+                  id="copyright"
+                  name="copyright"
+                  value={formData.copyright}
+                  onChange={handleInputChange}
+                  placeholder="Enter copyright text"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="seoDescription">SEO Description</label>
+                <textarea
+                  id="seoDescription"
+                  name="seoDescription"
+                  value={formData.seoDescription}
+                  onChange={handleInputChange}
+                  placeholder="Enter SEO description"
+                  rows={4}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="siteName">Site Name</label>
-            <input
-              type="text"
-              id="siteName"
-              name="siteName"
-              value={formData.siteName}
-              onChange={handleInputChange}
-              placeholder="Enter site name"
-            />
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="w-40 bg-[#4379EE] text-white font-bold py-3 px-6 rounded-md hover:-translate-y-[2px] hover:shadow-[0_4px_8px_rgba(67,121,238,0.2)] hover:bg-[#3668d8] transition duration-200"
+            >
+              Save
+            </button>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="seoTitle">SEO Title</label>
-            <input
-              type="text"
-              id="seoTitle"
-              name="seoTitle"
-              value={formData.seoTitle}
-              onChange={handleInputChange}
-              placeholder="Enter SEO title"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="seoDescription">SEO Description</label>
-            <textarea
-              id="seoDescription"
-              name="seoDescription"
-              value={formData.seoDescription}
-              onChange={handleInputChange}
-              placeholder="Enter SEO description"
-              rows={4}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="seoKeywords">SEO Keywords</label>
-            <input
-              type="text"
-              id="seoKeywords"
-              name="seoKeywords"
-              value={formData.seoKeywords}
-              onChange={handleInputChange}
-              placeholder="Enter SEO keywords"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="copyright">Copyright</label>
-            <input
-              type="text"
-              id="copyright"
-              name="copyright"
-              value={formData.copyright}
-              onChange={handleInputChange}
-              placeholder="Enter copyright text"
-            />
-          </div>
-
-          <button type="submit" className="save-button">
-            Save
-          </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 };
 

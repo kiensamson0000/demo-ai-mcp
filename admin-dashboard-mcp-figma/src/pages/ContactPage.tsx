@@ -95,7 +95,7 @@ const ContactPage: React.FC = () => {
 
       {/* Add New Contact Button */}
       <div className="mt-4">
-        <button className="add-contact-button bg-[#4379EE] text-white font-bold py-3 px-6 rounded-md hover:bg-[#3668d8]">
+        <button className="bg-[#4379EE] text-white font-bold py-3 px-6 rounded-md hover:-translate-y-[2px] hover:shadow-[0_4px_8px_rgba(67,121,238,0.2)] hover:bg-[#3668d8] transition duration-200">
           Add New Contact
         </button>
       </div>

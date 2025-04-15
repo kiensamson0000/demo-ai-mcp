@@ -23,15 +23,3 @@
   opacity: 0.9;
   transform: translateY(-1px);
 }
-
-/* Add new contact button */
-.add-contact-button {
-  transition: all 0.2s ease;
-  background-color: #4379ee;
-}
-
-.add-contact-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(67, 121, 238, 0.2);
-  background-color: #3668d8;
-}
