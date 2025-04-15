@@ -3,20 +3,20 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   FiHome,
   FiBox,
-  FiStar,
-  FiMail,
+  FiInbox,
   FiList,
-  FiDatabase,
-  FiCalendar,
   FiDollarSign,
+  FiCalendar,
   FiCheckSquare,
-  FiPhone,
+  FiUsers,
   FiFileText,
   FiGrid,
-  FiUsers,
   FiLayout,
   FiSettings,
   FiLogOut,
+  FiStar,
+  FiDatabase,
+  FiPhone,
 } from "react-icons/fi";
 import { NavSection } from "../../types";
 
@@ -138,7 +138,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       case "favorites":
         return <FiStar />;
       case "inbox":
-        return <FiMail />;
+        return <FiInbox />;
       case "order lists":
         return <FiList />;
       case "product stock":
@@ -195,9 +195,9 @@ const Sidebar: React.FC<SidebarProps> = ({
     >
       {/* Logo */}
       <div
-        className={`text-primary text-center text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px] ${
-          isExpanded ? "" : "px-[10px]"
-        }`}
+        className={`text-primary text-center text-xl font-extrabold py-[30px] ${
+          isExpanded ? "px-[25px]" : "px-[10px]"
+        } mb-[10px] tracking-[-0.2px]`}
       >
         {isExpanded ? (
           <>
@@ -229,7 +229,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                         isExpanded
                           ? "px-[25px] justify-start"
                           : "px-[10px] justify-center"
-                      } text-primary-text text-sm font-semibold tracking-[0.3px]  relative transition-colors hover:bg-gray-100`}
+                      } text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors hover:bg-gray-100`}
                       onClick={() => handleNavClick(item.path)}
                       title={!isExpanded ? item.name : undefined}
                     >
@@ -250,7 +250,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                           isExpanded
                             ? "px-[25px] justify-start"
                             : "px-[10px] justify-center"
-                        } text-primary-text text-sm  font-semibold tracking-[0.3px] relative transition-colors ${
+                        } text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors ${
                           isActive
                             ? "bg-primary text-white relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary"
                             : "hover:bg-gray-100"

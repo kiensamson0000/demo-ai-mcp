@@ -73,21 +73,18 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!userMenuOpen);
-    // Close other menus
     setLangMenuOpen(false);
     setNotificationsOpen(false);
   };
 
   const toggleLangMenu = () => {
     setLangMenuOpen(!langMenuOpen);
-    // Close other menus
     setUserMenuOpen(false);
     setNotificationsOpen(false);
   };
 
   const toggleNotifications = () => {
     setNotificationsOpen(!notificationsOpen);
-    // Close other menus
     setUserMenuOpen(false);
     setLangMenuOpen(false);
   };
@@ -102,23 +99,19 @@ const Navbar: React.FC<NavbarProps> = ({
     <div className="h-16 flex items-center justify-between px-8 py-4 border-b border-divider-color bg-white shadow-sm z-10">
       {/* Left area - Search */}
       <div className="flex items-center">
-        <div className="md:block">
-          <button
-            onClick={toggleSidebar}
-            className="text-xl text-gray-600 mr-4 cursor-pointer p-1 rounded hover:bg-gray-100 transition-colors"
-          >
-            <FiMenu className="w-5 h-5" />
-          </button>
-        </div>
-        <div className="flex-1">
-          <div className="relative w-[280px] md:w-[420px]">
-            <input
-              type="text"
-              className="w-full h-10 pl-10 pr-4 rounded-[19px] bg-[#F5F6FA] text-sm text-primary-text outline-none focus:ring-1 focus:ring-primary focus:bg-white transition-all border border-[#D5D5D5]"
-              placeholder="Search"
-            />
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary/70" />
-          </div>
+        <button
+          onClick={toggleSidebar}
+          className="text-xl text-gray-600 mr-4 cursor-pointer p-1 rounded hover:bg-gray-100 transition-colors"
+        >
+          <FiMenu className="w-5 h-5" />
+        </button>
+        <div className="relative w-[280px] md:w-[420px]">
+          <input
+            type="text"
+            className="w-full h-10 pl-10 pr-4 rounded-[19px] bg-[#F5F6FA] text-sm text-primary-text outline-none focus:ring-1 focus:ring-primary focus:bg-white transition-all border border-[#D5D5D5]"
+            placeholder="Search"
+          />
+          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary/70" />
         </div>
       </div>
 
@@ -211,14 +204,14 @@ const Navbar: React.FC<NavbarProps> = ({
           onClick={toggleLangMenu}
           ref={langMenuRef}
         >
-          <div className="flag w-5 h-5 overflow-hidden rounded-[5px] border border-[#D8D8D8]/50">
+          <div className="w-5 h-5 overflow-hidden rounded-[5px] border border-[#D8D8D8]/50">
             <img
               src={englishIcon}
               alt="english"
               className="w-full h-full object-cover"
             />
           </div>
-          <span className="language-text">English</span>
+          <span>English</span>
           <FiChevronDown className="text-[#646464] text-sm" />
 
           {/* Language dropdown */}
@@ -247,7 +240,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   <div className="w-5 h-5 rounded overflow-hidden border border-[#D8D8D8]/50 mr-3">
                     <img
                       src={frenchIcon}
-                      alt="frenchIcon"
+                      alt="French"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -259,7 +252,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   <div className="w-5 h-5 rounded overflow-hidden border border-[#D8D8D8]/50 mr-3">
                     <img
                       src={spanishIcon}
-                      alt="spanishIcon"
+                      alt="Spanish"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -284,7 +277,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 alt={userName}
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  // Fallback to default avatar if image fails to load
                   (e.target as HTMLImageElement).src = defaultAvatar;
                 }}
               />
