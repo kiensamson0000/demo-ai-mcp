@@ -31,8 +31,7 @@ const RevenueChart: React.FC<RevenueChartProps> = ({
         {
           label: "Profit",
           data: currentMonthData.profitData,
-          borderWidth: 1.5,
-          borderColor: "#A370F7",
+          borderWidth: 0,
           backgroundColor: function (context) {
             const chart = context.chart;
             const { ctx, chartArea } = chart;
@@ -54,8 +53,7 @@ const RevenueChart: React.FC<RevenueChartProps> = ({
         {
           label: "Sales",
           data: currentMonthData.salesData,
-          borderWidth: 1.5,
-          borderColor: "#FF7A5C",
+          borderWidth: 0,
           backgroundColor: function (context) {
             const chart = context.chart;
             const { ctx, chartArea } = chart;
