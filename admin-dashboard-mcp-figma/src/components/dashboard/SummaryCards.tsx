@@ -12,7 +12,7 @@ const SummaryCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 stats-grid">
       {/* Total Users */}
-      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#8280FF]/20 flex items-center justify-center">
           <FiUsers className="text-[#8280FF] text-xl" />
         </div>
@@ -29,7 +29,7 @@ const SummaryCards: React.FC = () => {
       </div>
 
       {/* Total Order */}
-      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#FEC53D]/20 flex items-center justify-center">
           <FiShoppingBag className="text-[#FEC53D] text-xl" />
         </div>
@@ -46,7 +46,7 @@ const SummaryCards: React.FC = () => {
       </div>
 
       {/* Total Sales */}
-      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#4AD991]/20 flex items-center justify-center">
           <FiDollarSign className="text-[#4AD991] text-xl" />
         </div>
@@ -63,7 +63,7 @@ const SummaryCards: React.FC = () => {
       </div>
 
       {/* Total Pending */}
-      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden card-hover">
+      <div className="bg-white rounded-[14px] shadow-[6px_6px_54px_0px_rgba(0,0,0,0.05)] p-6 relative overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#FF9066]/30 flex items-center justify-center">
           <FiPackage className="text-[#FF9066] text-xl" />
         </div>

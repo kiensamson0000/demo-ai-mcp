@@ -11,7 +11,6 @@ import {
   FiEdit,
   FiSend,
 } from "react-icons/fi";
-import "../assets/styles/inbox.css"; // Import the inbox styles
 
 interface EmailMessage {
   id: number;
@@ -159,13 +158,29 @@ const InboxPage: React.FC = () => {
   const getLabelInfo = (label: string | null) => {
     switch (label) {
       case "primary":
-        return { name: "Primary", className: "label label-primary" };
+        return {
+          name: "Primary",
+          className:
+            "bg-[rgba(0,182,155,0.2)] text-[#00b69b] rounded px-1.5 py-0.5 text-xs font-semibold",
+        };
       case "work":
-        return { name: "Work", className: "label label-work" };
+        return {
+          name: "Work",
+          className:
+            "bg-[rgba(253,154,86,0.2)] text-[#fd9a56] rounded px-1.5 py-0.5 text-xs font-semibold",
+        };
       case "social":
-        return { name: "Social", className: "label label-social" };
+        return {
+          name: "Social",
+          className:
+            "bg-[rgba(90,140,255,0.2)] text-[#5a8cff] rounded px-1.5 py-0.5 text-xs font-semibold",
+        };
       case "friends":
-        return { name: "Friends", className: "label label-friends" };
+        return {
+          name: "Friends",
+          className:
+            "bg-[rgba(212,86,253,0.2)] text-[#d456fd] rounded px-1.5 py-0.5 text-xs font-semibold",
+        };
       default:
         return { name: "", className: "" };
     }
@@ -179,7 +194,7 @@ const InboxPage: React.FC = () => {
         {/* Left Sidebar */}
         <div className="w-[260px] bg-white rounded-[14px] border border-[#B9B9B9]/30 p-4">
           {/* Compose Button */}
-          <button className="w-full bg-[#4880FF] text-white font-bold py-3 px-4 rounded-lg mb-6 compose-btn">
+          <button className="w-full bg-[#4880FF] text-white font-bold py-3 px-4 rounded-lg mb-6 shadow-[0_0_0_0_rgba(72,128,255,0.4)] animate-pulse">
             + Compose
           </button>
 
@@ -189,63 +204,65 @@ const InboxPage: React.FC = () => {
 
             <div className="space-y-4">
               {/* Inbox */}
-              <div className="category-item active">
-                <FiMail className="icon text-[#4880FF]" />
+              <div className="flex items-center p-2 rounded bg-[rgba(72,128,255,0.1)]">
+                <FiMail className="text-[#4880FF] mr-3" />
                 <span className="font-bold text-[#4880FF]">Inbox</span>
-                <span className="count text-[#4880FF] opacity-80">1253</span>
+                <span className="ml-auto text-[#4880FF] text-sm opacity-80">
+                  1253
+                </span>
               </div>
 
               {/* Starred */}
-              <div className="category-item">
-                <FiStar className="icon text-gray-700" />
+              <div className="flex items-center p-2 rounded hover:bg-[rgba(72,128,255,0.05)] transition-colors cursor-pointer">
+                <FiStar className="text-gray-700 mr-3" />
                 <span className="font-semibold">Starred</span>
-                <span className="count text-gray-600 opacity-60">245</span>
+                <span className="ml-auto text-gray-500 text-sm">2</span>
               </div>
 
               {/* Sent */}
-              <div className="category-item">
-                <FiSend className="icon text-gray-700" />
+              <div className="flex items-center p-2 rounded hover:bg-[rgba(72,128,255,0.05)] transition-colors cursor-pointer">
+                <FiSend className="text-gray-700 mr-3" />
                 <span className="font-semibold">Sent</span>
-                <span className="count text-gray-600 opacity-60">24,532</span>
+                <span className="ml-auto text-gray-500 text-sm">24,532</span>
               </div>
 
               {/* Draft */}
-              <div className="category-item">
-                <FiEdit className="icon text-gray-700" />
+              <div className="flex items-center p-2 rounded hover:bg-[rgba(72,128,255,0.05)] transition-colors cursor-pointer">
+                <FiEdit className="text-gray-700 mr-3" />
                 <span className="font-semibold">Draft</span>
-                <span className="count text-gray-600 opacity-60">09</span>
+                <span className="ml-auto text-gray-500 text-sm">09</span>
               </div>
 
               {/* Spam */}
-              <div className="category-item">
-                <FiAlertCircle className="icon text-gray-700" />
+              <div className="flex items-center p-2 rounded hover:bg-[rgba(72,128,255,0.05)] transition-colors cursor-pointer">
+                <FiAlertCircle className="text-gray-700 mr-3" />
                 <span className="font-semibold">Spam</span>
-                <span className="count text-gray-600 opacity-60">14</span>
+                <span className="ml-auto text-gray-500 text-sm">14</span>
               </div>
 
               {/* Bin */}
-              <div className="category-item">
-                <FiTrash2 className="icon text-gray-700" />
+              <div className="flex items-center p-2 rounded hover:bg-[rgba(72,128,255,0.05)] transition-colors cursor-pointer">
+                <FiTrash2 className="text-gray-700 mr-3" />
                 <span className="font-semibold">Bin</span>
-                <span className="count text-gray-600 opacity-60">9</span>
+                <span className="ml-auto text-gray-500 text-sm">9</span>
               </div>
             </div>
           </div>
 
           {/* Labels Section */}
           <div className="mb-6">
-            <h2 className="text-[16px] font-bold mb-4">Label</h2>
+            <h2 className="text-[16px] font-bold mb-4">Labels</h2>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {/* Primary Label */}
               <div className="flex items-center gap-3">
-                <div className="w-4 h-4 border-2 border-emerald-500 rounded"></div>
+                <div className="w-4 h-4 border-2 border-[#00b69b] rounded"></div>
                 <span className="font-semibold">Primary</span>
               </div>
 
               {/* Work Label */}
               <div className="flex items-center gap-3">
-                <div className="w-4 h-4 border-2 border-orange-500 rounded"></div>
+                <div className="w-4 h-4 border-2 border-[#fd9a56] rounded"></div>
                 <span className="font-semibold">Work</span>
               </div>
 
@@ -264,9 +281,11 @@ const InboxPage: React.FC = () => {
           </div>
 
           {/* Create New Label */}
-          <div className="flex items-center justify-between text-gray-500 mt-6 create-label">
+          <div className="flex items-center justify-between text-gray-500 mt-6 cursor-pointer transition-all hover:text-[#4880FF]">
             <span className="font-semibold">Create New Label</span>
-            <span className="text-xl plus-icon">+</span>
+            <span className="text-xl transition-transform duration-300 hover:rotate-90">
+              +
+            </span>
           </div>
         </div>
 
@@ -278,7 +297,7 @@ const InboxPage: React.FC = () => {
               <input
                 type="text"
                 placeholder="Search mail"
-                className="w-full h-10 pl-10 pr-4 bg-[#F5F6FA] border border-[#D5D5D5] rounded-full text-sm outline-none search-mail"
+                className="w-full h-10 pl-10 pr-4 bg-[#F5F6FA] border border-[#D5D5D5] rounded-full text-sm outline-none transition-all focus:bg-white focus:border-[#4880ff] focus:shadow-[0_0_0_3px_rgba(72,128,255,0.1)]"
               />
               <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
@@ -287,13 +306,18 @@ const InboxPage: React.FC = () => {
           {/* Email List */}
           <div className="divide-y divide-gray-200">
             {messages.map((message) => (
-              <div key={message.id} className="message-row transition-colors">
+              <div
+                key={message.id}
+                className="hover:bg-[rgba(72,128,255,0.05)] transition-colors"
+              >
                 <div className="flex items-center p-4">
                   {/* Checkbox */}
                   <div className="mr-3">
                     <div
-                      className={`inbox-checkbox ${
-                        message.isChecked ? "checked" : ""
+                      className={`w-4 h-4 border border-gray-400 rounded cursor-pointer transition-all ${
+                        message.isChecked
+                          ? "bg-[#4880ff] border-[#4880ff] relative after:content-[''] after:absolute after:left-1.5 after:top-0.5 after:w-1 after:h-2 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
+                          : "hover:border-[#4880ff] hover:bg-[rgba(72,128,255,0.1)]"
                       }`}
                       onClick={() => toggleCheck(message.id)}
                     />
@@ -305,8 +329,10 @@ const InboxPage: React.FC = () => {
                     className="mr-3"
                   >
                     <FiStar
-                      className={`star-icon ${
-                        message.isStarred ? "active" : "text-gray-400"
+                      className={`transition-all transform hover:scale-110 ${
+                        message.isStarred
+                          ? "text-[#ffd56d] fill-[#ffd56d]"
+                          : "text-gray-400"
                       }`}
                     />
                   </button>
@@ -355,12 +381,12 @@ const InboxPage: React.FC = () => {
               </div>
 
               {/* Pagination */}
-              <div className="pagination-controls">
-                <button>
+              <div className="flex items-center bg-[#FAFBFD] border border-[#D5D5D5] rounded-lg">
+                <button className="px-3 py-2 text-gray-600 hover:text-[#4880ff] transition-colors">
                   <FiChevronLeft />
                 </button>
-                <div className="divider"></div>
-                <button>
+                <div className="h-5 w-px bg-gray-300 opacity-70"></div>
+                <button className="px-3 py-2 text-gray-600 hover:text-[#4880ff] transition-colors">
                   <FiChevronRight />
                 </button>
               </div>

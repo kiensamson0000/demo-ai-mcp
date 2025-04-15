@@ -6,15 +6,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
-import "./assets/styles/dashboard.css";
-import "./assets/styles/inbox.css";
-import "./assets/styles/orderLists.css";
-import "./assets/styles/pricing.css";
-import "./assets/styles/calendar.css";
-import "./assets/styles/todo.css";
-import "./assets/styles/contact.css";
-import "./assets/styles/invoice.css";
-import "./assets/styles/settings.css";
 
 // Auth Provider
 import { AuthProvider } from "./contexts/AuthContext";

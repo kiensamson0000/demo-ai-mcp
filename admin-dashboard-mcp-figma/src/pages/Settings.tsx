@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import "../assets/styles/settings.css";
 import { FaCamera } from "react-icons/fa";
 
 interface SettingsFormData {
@@ -69,7 +68,7 @@ const Settings: React.FC = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex flex-col items-center gap-3">
             <div
-              className="rounded-full bg-[#ECECEE] w-20 h-20 relative"
+              className="rounded-full bg-[#ECECEE] w-20 h-20 relative cursor-pointer"
               onClick={handleUploadLogo}
             >
               {logoPreview ? (
@@ -79,7 +78,7 @@ const Settings: React.FC = () => {
                   className="w-full h-full object-cover rounded-full"
                 />
               ) : (
-                <FaCamera className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-2xl" />
+                <FaCamera className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl" />
               )}
             </div>
             <input
@@ -89,11 +88,11 @@ const Settings: React.FC = () => {
               name="logo"
               accept="image/*"
               onChange={handleLogoChange}
-              className="hidden-input"
+              className="hidden"
             />
             <label
               htmlFor="logo-upload"
-              className="font-bold text-[#4379EE] text-sm"
+              className="font-bold text-[#4379EE] text-sm cursor-pointer"
             >
               Upload Logo
             </label>
@@ -101,8 +100,13 @@ const Settings: React.FC = () => {
 
           <div className="grid grid-cols-2 gap-14">
             <div className="flex flex-col gap-y-8">
-              <div className="form-group">
-                <label htmlFor="siteName">Site Name</label>
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="siteName"
+                  className="font-semibold text-gray-700"
+                >
+                  Site Name
+                </label>
                 <input
                   type="text"
                   id="siteName"
@@ -110,11 +114,17 @@ const Settings: React.FC = () => {
                   value={formData.siteName}
                   onChange={handleInputChange}
                   placeholder="Enter site name"
+                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#4379EE]/20 focus:border-[#4379EE]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="seoTitle">SEO Title</label>
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="seoTitle"
+                  className="font-semibold text-gray-700"
+                >
+                  SEO Title
+                </label>
                 <input
                   type="text"
                   id="seoTitle"
@@ -122,10 +132,16 @@ const Settings: React.FC = () => {
                   value={formData.seoTitle}
                   onChange={handleInputChange}
                   placeholder="Enter SEO title"
+                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#4379EE]/20 focus:border-[#4379EE]"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="seoKeywords">SEO Keywords</label>
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="seoKeywords"
+                  className="font-semibold text-gray-700"
+                >
+                  SEO Keywords
+                </label>
                 <input
                   type="text"
                   id="seoKeywords"
@@ -133,12 +149,18 @@ const Settings: React.FC = () => {
                   value={formData.seoKeywords}
                   onChange={handleInputChange}
                   placeholder="Enter SEO keywords"
+                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#4379EE]/20 focus:border-[#4379EE]"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-y-8">
-              <div className="form-group">
-                <label htmlFor="copyright">Copyright</label>
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="copyright"
+                  className="font-semibold text-gray-700"
+                >
+                  Copyright
+                </label>
                 <input
                   type="text"
                   id="copyright"
@@ -146,10 +168,16 @@ const Settings: React.FC = () => {
                   value={formData.copyright}
                   onChange={handleInputChange}
                   placeholder="Enter copyright text"
+                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#4379EE]/20 focus:border-[#4379EE]"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="seoDescription">SEO Description</label>
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="seoDescription"
+                  className="font-semibold text-gray-700"
+                >
+                  SEO Description
+                </label>
                 <textarea
                   id="seoDescription"
                   name="seoDescription"
@@ -157,6 +185,7 @@ const Settings: React.FC = () => {
                   onChange={handleInputChange}
                   placeholder="Enter SEO description"
                   rows={4}
+                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#4379EE]/20 focus:border-[#4379EE] resize-none"
                 />
               </div>
             </div>
