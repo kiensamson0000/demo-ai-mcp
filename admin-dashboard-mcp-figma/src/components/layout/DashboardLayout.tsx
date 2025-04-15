@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -10,6 +10,12 @@ import { useAuth } from "../../contexts/AuthContext";
  */
 const DashboardLayout: React.FC = () => {
   const { user, logout } = useAuth();
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+
+  // Toggle sidebar expanded/collapsed state
+  const toggleSidebar = () => {
+    setIsSidebarExpanded(!isSidebarExpanded);
+  };
 
   // Handle logout
   const handleLogout = () => {
@@ -20,17 +26,28 @@ const DashboardLayout: React.FC = () => {
   const userName = user?.name || "User";
   const userAvatar = user?.avatar || "";
 
+  // Calculate main content margin based on sidebar width
+  const mainContentMargin = isSidebarExpanded ? "ml-[260px]" : "ml-[70px]";
+
   return (
     <div className="flex h-screen bg-[#f5f6fa]">
       {/* Sidebar */}
-      <Sidebar logoText1="Dash" logoText2="Stack" onLogout={handleLogout} />
+      <Sidebar
+        logoText1="Dash"
+        logoText2="Stack"
+        onLogout={handleLogout}
+        isExpanded={isSidebarExpanded}
+      />
 
-      <div className="flex-1 flex flex-col overflow-hidden ml-[260px]">
+      <div
+        className={`flex-1 flex flex-col overflow-hidden ${mainContentMargin} transition-all duration-300 ease-in-out`}
+      >
         {/* Navbar */}
         <Navbar
           userName={userName}
           userAvatar={userAvatar}
           onLogout={handleLogout}
+          toggleSidebar={toggleSidebar}
         />
 
         {/* Main Content */}

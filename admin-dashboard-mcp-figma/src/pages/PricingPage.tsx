@@ -1,14 +1,4 @@
 import React from "react";
-import {
-  FiCheck,
-  FiUsers,
-  FiDatabase,
-  FiPieChart,
-  FiCode,
-  FiLayers,
-  FiSettings,
-} from "react-icons/fi";
-// import patternBg from "../assets/figma/pattern-bg.svg";
 
 const PricingPage: React.FC = () => {
   return (

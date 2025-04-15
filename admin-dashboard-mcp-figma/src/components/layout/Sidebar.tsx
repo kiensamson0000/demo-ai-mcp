@@ -26,6 +26,7 @@ interface SidebarProps {
   activePath?: string;
   onNavigate?: (path: string, isLogout?: boolean) => void;
   onLogout?: () => void;
+  isExpanded?: boolean;
 }
 
 /**
@@ -34,9 +35,11 @@ interface SidebarProps {
  * Main navigation sidebar with categorized navigation links
  *
  * @param {string} logoText1 - Text to display in the logo area
+ * @param {string} logoText2 - Text to display in the logo area
  * @param {string} activePath - Optional currently active path to highlight
  * @param {function} onNavigate - Optional callback when navigation item is clicked
  * @param {function} onLogout - Optional callback to handle logout
+ * @param {boolean} isExpanded - Whether the sidebar is expanded or collapsed
  */
 const Sidebar: React.FC<SidebarProps> = ({
   logoText1,
@@ -44,6 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   activePath,
   onNavigate,
   onLogout,
+  isExpanded = true,
 }) => {
   const location = useLocation();
   const currentPath = activePath || location.pathname;
@@ -182,19 +186,34 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
+  // Use a transition for smooth width change
+  const sidebarWidth = isExpanded ? "w-[260px]" : "w-[70px]";
+
   return (
-    <aside className="w-[260px] bg-white border-r border-divider-color p-0 flex flex-col h-screen fixed left-0 top-0 z-10 overflow-y-auto">
+    <aside
+      className={`${sidebarWidth} bg-white border-r border-divider-color p-0 flex flex-col h-screen fixed left-0 top-0 z-10 overflow-y-auto transition-all duration-300 ease-in-out`}
+    >
       {/* Logo */}
-      <div className="text-primary text-center text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px]">
-        <span className="text-primary">{logoText1}</span>
-        <span className="text-secondary">{logoText2}</span>
+      <div
+        className={`text-primary text-center text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px] ${
+          isExpanded ? "" : "px-[10px]"
+        }`}
+      >
+        {isExpanded ? (
+          <>
+            <span className="text-primary">{logoText1}</span>
+            <span className="text-secondary">{logoText2}</span>
+          </>
+        ) : (
+          <span className="text-primary">{logoText1.charAt(0)}</span>
+        )}
       </div>
 
       <nav>
         {navSections.map((section, sectionIndex) => (
           <React.Fragment key={sectionIndex}>
             {/* Add section title if exists */}
-            {sectionIndex === 1 && (
+            {sectionIndex === 1 && isExpanded && (
               <p className="py-[10px] px-[25px] text-xs font-bold tracking-[0.26px] text-secondary/60 mb-[5px] uppercase">
                 PAGES
               </p>
@@ -206,30 +225,48 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <li key={itemIndex}>
                   {item.path === "/logout" ? (
                     <button
-                      className="flex items-center w-full py-3 px-[25px] text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors hover:bg-gray-100"
+                      className={`flex items-center w-full py-3 ${
+                        isExpanded
+                          ? "px-[25px] justify-start"
+                          : "px-[10px] justify-center"
+                      } text-primary-text text-sm font-semibold tracking-[0.3px]  relative transition-colors hover:bg-gray-100`}
                       onClick={() => handleNavClick(item.path)}
+                      title={!isExpanded ? item.name : undefined}
                     >
-                      <i className="mr-[10px] text-base flex items-center justify-center opacity-80 w-5">
+                      <i
+                        className={`${
+                          isExpanded ? "mr-[10px]" : ""
+                        } text-base flex items-center justify-center opacity-80 w-5`}
+                      >
                         {getIconForNav(item.name)}
                       </i>
-                      <span>{item.name}</span>
+                      {isExpanded && <span>{item.name}</span>}
                     </button>
                   ) : (
                     <NavLink
                       to={item.path}
                       className={({ isActive }: { isActive: boolean }) =>
-                        `flex items-center py-3 px-[25px] text-primary-text text-sm font-semibold tracking-[0.3px] relative transition-colors ${
+                        `flex items-center py-3 ${
+                          isExpanded
+                            ? "px-[25px] justify-start"
+                            : "px-[10px] justify-center"
+                        } text-primary-text text-sm  font-semibold tracking-[0.3px] relative transition-colors ${
                           isActive
                             ? "bg-primary text-white relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary"
                             : "hover:bg-gray-100"
                         }`
                       }
                       onClick={() => handleNavClick(item.path)}
+                      title={!isExpanded ? item.name : undefined}
                     >
-                      <i className="mr-[10px] text-base flex items-center justify-center opacity-80 w-5">
+                      <i
+                        className={`${
+                          isExpanded ? "mr-[10px]" : ""
+                        } text-base flex items-center justify-center opacity-80 w-5`}
+                      >
                         {getIconForNav(item.name)}
                       </i>
-                      <span>{item.name}</span>
+                      {isExpanded && <span>{item.name}</span>}
                     </NavLink>
                   )}
                 </li>

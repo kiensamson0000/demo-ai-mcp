@@ -20,12 +20,14 @@ interface NavbarProps {
   userName?: string;
   userAvatar?: string;
   onLogout?: () => void;
+  toggleSidebar?: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
   userName = "Moni Roy",
   userAvatar = defaultAvatar,
   onLogout,
+  toggleSidebar = () => {},
 }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
@@ -100,8 +102,13 @@ const Navbar: React.FC<NavbarProps> = ({
     <div className="h-16 flex items-center justify-between px-8 py-4 border-b border-divider-color bg-white shadow-sm z-10">
       {/* Left area - Search */}
       <div className="flex items-center">
-        <div className="hidden md:block">
-          <FiMenu className="text-xl text-gray-600 mr-4 cursor-pointer" />
+        <div className="md:block">
+          <button
+            onClick={toggleSidebar}
+            className="text-xl text-gray-600 mr-4 cursor-pointer p-1 rounded hover:bg-gray-100 transition-colors"
+          >
+            <FiMenu className="w-5 h-5" />
+          </button>
         </div>
         <div className="flex-1">
           <div className="relative w-[280px] md:w-[420px]">
