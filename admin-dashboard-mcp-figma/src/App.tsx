@@ -33,6 +33,7 @@ import ElementsUI from "./pages/ElementsUI";
 import Table from "./pages/Table";
 import TeamPage from "./pages/TeamPage";
 import Settings from "./pages/Settings";
+import Favorites from "./pages/Favorites";
 
 /**
  * Main App Component
@@ -65,6 +66,7 @@ const App: React.FC = () => {
               <Route path="/table" element={<Table />} />
               <Route path="/team" element={<TeamPage />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/favorites" element={<Favorites />} />
             </Route>
           </Route>
 
