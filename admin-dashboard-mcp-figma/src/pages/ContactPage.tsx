@@ -79,7 +79,12 @@ const ContactPage: React.FC = () => {
   return (
     <main className="px-8 py-6">
       {/* Header */}
-      <h1 className="text-[#202224] text-3xl font-bold mb-8">Contact</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-[#202224] text-3xl font-bold">Contact</h1>
+        <button className="bg-[#4379EE] text-white font-bold py-3 px-6 rounded-md hover:-translate-y-[2px] hover:shadow-[0_4px_8px_rgba(67,121,238,0.2)] hover:bg-[#3668d8] transition duration-200">
+          Add New Contact
+        </button>
+      </div>
 
       {/* Contact Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -91,13 +96,6 @@ const ContactPage: React.FC = () => {
             image={contact.image}
           />
         ))}
-      </div>
-
-      {/* Add New Contact Button */}
-      <div className="mt-4">
-        <button className="bg-[#4379EE] text-white font-bold py-3 px-6 rounded-md hover:-translate-y-[2px] hover:shadow-[0_4px_8px_rgba(67,121,238,0.2)] hover:bg-[#3668d8] transition duration-200">
-          Add New Contact
-        </button>
       </div>
     </main>
   );

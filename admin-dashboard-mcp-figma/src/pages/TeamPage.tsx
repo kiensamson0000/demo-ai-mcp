@@ -121,7 +121,7 @@ export default function TeamPage() {
     <main className="px-8 py-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-[#202224] text-3xl font-bold mb-8">Team</h1>
+        <h1 className="text-[#202224] text-3xl font-bold">Team</h1>
         <button className="bg-[#4379EE] text-white font-bold py-3 px-6 rounded-md hover:-translate-y-[2px] hover:shadow-[0_4px_8px_rgba(67,121,238,0.2)] hover:bg-[#3668d8] transition duration-200">
           Add New Member
         </button>

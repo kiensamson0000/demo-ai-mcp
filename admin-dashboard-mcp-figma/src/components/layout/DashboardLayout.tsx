@@ -23,7 +23,7 @@ const DashboardLayout: React.FC = () => {
   return (
     <div className="flex h-screen bg-[#f5f6fa]">
       {/* Sidebar */}
-      <Sidebar logoText="DashStack" onLogout={handleLogout} />
+      <Sidebar logoText1="Dash" logoText2="Stack" onLogout={handleLogout} />
 
       <div className="flex-1 flex flex-col overflow-hidden ml-[260px]">
         {/* Navbar */}

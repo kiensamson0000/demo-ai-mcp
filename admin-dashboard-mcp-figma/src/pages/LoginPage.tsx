@@ -46,13 +46,17 @@ const LoginPage: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#f5f6fa] p-4">
       <div className="w-full max-w-md bg-white rounded-[14px] shadow-lg p-8 space-y-6">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-[#202224]">DashStack</h1>
-          <p className="text-[#202224]/60 mt-2">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-[#202224]">
+            Login to Account
+          </h1>
+          <p className="text-[#202224]/60 mt-2">
+            Please enter your email and password to continue
+          </p>
         </div>
 
         {/* Login credentials info */}
         <div className="bg-blue-50 p-4 rounded-lg text-sm">
-          <p className="font-medium text-blue-700">Demo Credentials:</p>
+          <p className="font-bold text-blue-700">Demo Credentials:</p>
           <p className="text-blue-600 mt-1">
             Admin: admin@example.com / admin123
           </p>

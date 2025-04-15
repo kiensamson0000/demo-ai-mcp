@@ -21,7 +21,8 @@ import {
 import { NavSection } from "../../types";
 
 interface SidebarProps {
-  logoText: string;
+  logoText1: string;
+  logoText2: string;
   activePath?: string;
   onNavigate?: (path: string, isLogout?: boolean) => void;
   onLogout?: () => void;
@@ -32,13 +33,14 @@ interface SidebarProps {
  *
  * Main navigation sidebar with categorized navigation links
  *
- * @param {string} logoText - Text to display in the logo area
+ * @param {string} logoText1 - Text to display in the logo area
  * @param {string} activePath - Optional currently active path to highlight
  * @param {function} onNavigate - Optional callback when navigation item is clicked
  * @param {function} onLogout - Optional callback to handle logout
  */
 const Sidebar: React.FC<SidebarProps> = ({
-  logoText,
+  logoText1,
+  logoText2,
   activePath,
   onNavigate,
   onLogout,
@@ -183,8 +185,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <aside className="w-[260px] bg-white border-r border-divider-color p-0 flex flex-col h-screen fixed left-0 top-0 z-10 overflow-y-auto">
       {/* Logo */}
-      <div className="text-primary text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px]">
-        {logoText}
+      <div className="text-primary text-center text-xl font-extrabold py-[30px] px-[25px] mb-[10px] tracking-[-0.2px]">
+        <span className="text-primary">{logoText1}</span>
+        <span className="text-secondary">{logoText2}</span>
       </div>
 
       <nav>
