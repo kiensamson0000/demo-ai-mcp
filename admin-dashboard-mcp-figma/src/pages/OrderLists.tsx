@@ -4,347 +4,222 @@ import {
   FiChevronRight,
   FiRefreshCw,
   FiChevronDown,
+  FiFilter,
 } from "react-icons/fi";
 
 const OrderLists: React.FC = () => {
+  // Order data based on Figma design
+  const orders = [
+    {
+      id: "00001",
+      name: "Christine Brooks",
+      address: "089 Kutch Green Apt. 448",
+      date: "04 Sep 2019",
+      type: "Electric",
+      status: "Completed",
+    },
+    {
+      id: "00002",
+      name: "Rosie Pearson",
+      address: "979 Immanuel Ferry Suite 526",
+      date: "28 May 2019",
+      type: "Book",
+      status: "Processing",
+    },
+    {
+      id: "00003",
+      name: "Darrell Caldwell",
+      address: "8587 Frida Ports",
+      date: "23 Nov 2019",
+      type: "Medicine",
+      status: "Rejected",
+    },
+    {
+      id: "00004",
+      name: "Gilbert Johnston",
+      address: "768 Destiny Lake Suite 600",
+      date: "05 Feb 2019",
+      type: "Mobile",
+      status: "Completed",
+    },
+    {
+      id: "00005",
+      name: "Alan Cain",
+      address: "042 Mylene Throughway",
+      date: "29 Jul 2019",
+      type: "Watch",
+      status: "Processing",
+    },
+    {
+      id: "00006",
+      name: "Alfred Murray",
+      address: "543 Weimann Mountain",
+      date: "15 Aug 2019",
+      type: "Medicine",
+      status: "Completed",
+    },
+    {
+      id: "00007",
+      name: "Maggie Sullivan",
+      address: "New Scottieberg",
+      date: "21 Dec 2019",
+      type: "Watch",
+      status: "Processing",
+    },
+    {
+      id: "00008",
+      name: "Rosie Todd",
+      address: "New Jon",
+      date: "30 Apr 2019",
+      type: "Medicine",
+      status: "On Hold",
+    },
+    {
+      id: "00009",
+      name: "Dollie Hines",
+      address: "124 Lyla Forge Suite 975",
+      date: "09 Jan 2019",
+      type: "Book",
+      status: "In Transit",
+    },
+  ];
+
+  const getStatusStyles = (status: string) => {
+    switch (status) {
+      case "Completed":
+        return "bg-[#E6F7F4] text-[#00B69B]"; // Green
+      case "Processing":
+        return "bg-[#EFE6FD] text-[#6226EF]"; // Purple
+      case "Rejected":
+        return "bg-[#FCE6E6] text-[#EF3826]"; // Red
+      case "On Hold":
+        return "bg-[#FFF8E7] text-[#FFA756]"; // Orange
+      case "In Transit":
+        return "bg-[#F2E6FF] text-[#BA29FF]"; // Purple
+      default:
+        return "bg-gray-100 text-gray-600";
+    }
+  };
+
   return (
-    <main className="px-8 py-6">
-      {/* Header */}
-      <h1 className="text-3xl font-bold text-[#202224] -tracking-[0.11px] mb-6">
-        Order Lists
-      </h1>
+    <div className="bg-[#F5F6FA] min-h-screen">
+      <main className="px-8 py-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-[32px] font-bold text-[#202224] tracking-[-0.5px]">
+            Order Lists
+          </h1>
+        </div>
 
-      {/* Filter Bar */}
-      <div className="bg-white rounded-xl border border-[#B9B9B9]/30 p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          {/* Filter By */}
-          <div className="relative px-4 py-2 flex items-center">
-            <p className="text-sm font-semibold text-[#202224]">Filter By</p>
-          </div>
+        {/* Filter Bar */}
+        <div className="bg-[#F9F9FB] rounded-xl shadow-sm border border-[#D5D5D5] p-6 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            {/* Filter By */}
+            <div className="relative flex items-center border-r border-[#979797]/70">
+              <FiFilter className="text-[#202224] mr-2" />
+              <p className="text-sm font-bold text-[#202224]">Filter By</p>
+            </div>
 
-          {/* Date */}
-          <div className="relative px-4 py-2 flex items-center justify-between cursor-pointer hover:bg-gray-50 rounded-lg">
-            <p className="text-sm font-semibold text-[#202224]">Date</p>
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+            {/* Date */}
+            <div className="relative flex items-center justify-between cursor-pointer border-r border-[#979797]/70">
+              <p className="text-sm font-bold text-[#202224]">Date</p>
               <FiChevronDown className="text-[#202224]" />
+            </div>
+
+            {/* Order Status */}
+            <div className="relative flex items-center justify-between cursor-pointer border-r border-[#979797]/70">
+              <p className="text-sm font-bold text-[#202224]">Order Status</p>
+              <FiChevronDown className="text-[#202224]" />
+            </div>
+
+            {/* Order Type */}
+            <div className="relative flex items-center justify-between cursor-pointer border-r border-[#979797]/70">
+              <p className="text-sm font-bold text-[#202224]">Order Type</p>
+              <FiChevronDown className="text-[#202224]" />
+            </div>
+
+            {/* Reset Filter */}
+            <div className="flex items-center justify-center">
+              <button className="flex items-center justify-center text-[#EA0234] font-semibold">
+                <FiRefreshCw className="mr-2" />
+                Reset Filter
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Orders Table */}
+        <div className="bg-white border border-[#B9B9B9]/30 rounded-xl shadow-sm mb-6 overflow-hidden">
+          {/* Table Header */}
+          <div className="bg-[#FCFDFD] border-b border-[#D5D5D5] py-4 px-6 grid grid-cols-7">
+            <div className="text-sm font-extrabold text-[#202224]/90">ID</div>
+            <div className="text-sm font-extrabold text-[#202224]/90">NAME</div>
+            <div className="text-sm font-extrabold text-[#202224]/90 col-span-2">
+              ADDRESS
+            </div>
+            <div className="text-sm font-extrabold text-[#202224]/90">DATE</div>
+            <div className="text-sm font-extrabold text-[#202224]/90">TYPE</div>
+            <div className="text-sm font-extrabold text-[#202224]/90">
+              STATUS
             </div>
           </div>
 
-          {/* Order Status */}
-          <div className="relative px-4 py-2 flex items-center justify-between cursor-pointer hover:bg-gray-50 rounded-lg">
-            <p className="text-sm font-semibold text-[#202224]">Order Status</p>
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-              <FiChevronDown className="text-[#202224]" />
-            </div>
+          {/* Table Body */}
+          <div className="divide-y divide-[#979797]/60">
+            {orders.map((order) => (
+              <div
+                key={order.id}
+                className="grid grid-cols-7 py-5 px-6 hover:bg-[#F8FAFF] transition-colors"
+              >
+                <div className="text-sm font-semibold text-[#202224]/90">
+                  #{order.id}
+                </div>
+                <div className="text-sm font-semibold text-[#202224]/90">
+                  {order.name}
+                </div>
+                <div className="text-sm font-semibold text-[#202224]/90 col-span-2">
+                  {order.address}
+                </div>
+                <div className="text-sm font-semibold text-[#202224]/90">
+                  {order.date}
+                </div>
+                <div className="text-sm font-semibold text-[#202224]/90">
+                  {order.type}
+                </div>
+                <div>
+                  <span
+                    className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-bold ${getStatusStyles(
+                      order.status
+                    )}`}
+                  >
+                    {order.status}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Order Type */}
-          <div className="relative px-4 py-2 flex items-center justify-between cursor-pointer hover:bg-gray-50 rounded-lg">
-            <p className="text-sm font-semibold text-[#202224]">Order Type</p>
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-              <FiChevronDown className="text-[#202224]" />
+        {/* Pagination */}
+        <div className="flex justify-between items-center mt-6">
+          <div className="text-sm text-[#202224]/60">Showing 1-09 of 78</div>
+          <div className="flex items-center gap-1">
+            <button className="w-8 h-8 flex items-center justify-center rounded-md border border-[#D5D5D5] bg-[#FAFBFD] text-[#202224]/60">
+              <FiChevronLeft size={18} />
+            </button>
+            <button className="w-8 h-8 flex items-center justify-center rounded-md bg-[#4880FF] text-white font-bold">
+              1
+            </button>
+            <div className="w-8 h-8 flex items-center justify-center text-[#202224]/90">
+              ...
             </div>
-          </div>
-
-          {/* Reset Filter */}
-          <div className="flex items-center justify-center">
-            <button className="flex items-center justify-center px-4 py-2 text-[#4379EE] hover:bg-[#4379EE]/5 rounded-lg transition-colors">
-              <FiRefreshCw className="mr-2" />
-              Reset Filter
+            <button className="w-8 h-8 flex items-center justify-center rounded-md border border-[#D5D5D5] text-[#202224]/90 font-semibold hover:bg-[#F8FAFF] transition-colors">
+              <FiChevronRight size={18} />
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Orders Table */}
-      <div className="bg-white border border-[#B9B9B9]/30 rounded-[14px] mb-6 overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-[#FCFDFD] border-b border-[#D5D5D5]">
-            <tr>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-[#202224]/90">
-                ID
-              </th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-[#202224]/90">
-                NAME
-              </th>
-              <th
-                colSpan={2}
-                className="px-6 py-4 text-left text-sm font-semibold text-[#202224]/90"
-              >
-                ADDRESS
-              </th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-[#202224]/90">
-                DATE
-              </th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-[#202224]/90">
-                TYPE
-              </th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-[#202224]/90">
-                STATUS
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#979797]/60">
-            {/* Row 1 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00001
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Christine Brooks
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                089 Kutch Green Apt. 448
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                04 Sep 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Electric
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(0,182,155,0.2)] text-[#00b69b]">
-                  Completed
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 2 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00002
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Rosie Pearson
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                979 Immanuel Ferry Suite 526
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                28 May 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Book
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(98,38,239,0.2)] text-[#6226ef]">
-                  Processing
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 3 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00003
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Darrell Caldwell
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                8587 Frida Ports
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                23 Nov 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Medicine
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(239,56,38,0.2)] text-[#ef3826]">
-                  Rejected
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 4 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00004
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Gilbert Johnston
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                768 Destiny Lake Suite 600
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                05 Feb 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Mobile
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(0,182,155,0.2)] text-[#00b69b]">
-                  Completed
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 5 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00005
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Alan Cain
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                042 Mylene Throughway
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                29 Jul 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Watch
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(98,38,239,0.2)] text-[#6226ef]">
-                  Processing
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 6 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00006
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Alfred Murray
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                543 Weimann Mountain
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                15 Aug 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Medicine
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(0,182,155,0.2)] text-[#00b69b]">
-                  Completed
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 7 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00007
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Maggie Sullivan
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                New Scottieberg
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                21 Dec 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Watch
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(98,38,239,0.2)] text-[#6226ef]">
-                  Processing
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 8 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00008
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Rosie Todd
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                New Jon
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                30 Apr 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Medicine
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(255,152,0,0.2)] text-[#ff9800]">
-                  On Hold
-                </span>
-              </td>
-            </tr>
-
-            {/* Row 9 */}
-            <tr className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                00009
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Dollie Hines
-              </td>
-              <td
-                colSpan={2}
-                className="px-6 py-4 text-sm font-semibold text-[#202224]/90"
-              >
-                124 Lyla Forge Suite 975
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                09 Jan 2019
-              </td>
-              <td className="px-6 py-4 text-sm font-semibold text-[#202224]/90">
-                Book
-              </td>
-              <td className="px-6 py-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold rounded bg-[rgba(30,136,229,0.2)] text-[#1e88e5]">
-                  In Transit
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* Pagination */}
-      <div className="flex justify-between items-center">
-        <div className="text-sm text-[#202224]/60">Showing 1-09 of 78</div>
-        <div className="flex items-center bg-[#FAFBFD] border border-[#D5D5D5] rounded-lg">
-          <button className="px-3 py-2 text-[#202224]/60 hover:text-[#4880ff] transition-colors">
-            <FiChevronLeft />
-          </button>
-          <div className="h-5 w-px bg-[#979797] opacity-70"></div>
-          <button className="px-3 py-2 text-[#202224]/90 hover:text-[#4880ff] transition-colors">
-            <FiChevronRight />
-          </button>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
