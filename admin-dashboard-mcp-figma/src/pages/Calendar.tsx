@@ -174,14 +174,13 @@ const Calendar: React.FC = () => {
           {/* Left Side - Events List */}
           <div className="w-full lg:w-1/3">
             <div className="bg-white rounded-[14px] border border-[#B9B9B9]/30 shadow-sm p-4 md:p-6 mb-6">
-              <h2 className="text-[18px] font-bold text-[#202224] mb-4">
-                You are going to
-              </h2>
-
               {/* Add New Event Button */}
               <button className="w-full bg-[#4880FF] hover:bg-[#4071e6] text-white font-bold py-3 px-4 rounded-lg mb-6 flex items-center justify-center transition-colors duration-200">
                 <FiPlus className="mr-2" /> Add New Event
               </button>
+              <h2 className="text-[18px] font-bold text-[#202224] mb-4">
+                You are going to
+              </h2>
 
               {/* Divider */}
               <div className="border-t border-[#E0E0E0] opacity-50 mb-6"></div>
@@ -256,20 +255,17 @@ const Calendar: React.FC = () => {
           {/* Right Side - Calendar */}
           <div className="w-full lg:w-2/3">
             <div className="bg-white rounded-[14px] border border-[#B9B9B9]/30 shadow-sm p-4 md:p-6">
-              {/* Today indicator */}
-              <div className="text-[14px] font-semibold text-[#202224]/60 mb-4">
-                Today
-              </div>
+              <div className="flex justify-between items-center">
+                {/* Today indicator */}
+                <div className="text-[14px] font-semibold text-[#202224]/60 mb-4">
+                  Today
+                </div>
 
-              {/* Calendar Header */}
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
-                <div className="flex items-center">
-                  <h2 className="text-[20px] md:text-[24px] font-bold mr-6">
-                    {monthNames[currentMonth]} {currentYear}
-                  </h2>
-                  <div className="flex gap-4">
+                {/* Calendar Header */}
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
+                  <div className="flex items-center">
                     <button
-                      className="p-1 transition-colors hover:bg-gray-100 rounded-full"
+                      className="transition-colors hover:bg-gray-100 rounded-full p-1"
                       onClick={goToPrevMonth}
                     >
                       {/* Previous arrow button */}
@@ -289,8 +285,11 @@ const Calendar: React.FC = () => {
                         />
                       </svg>
                     </button>
+                    <h2 className="text-[20px] md:text-[24px] font-bold mx-6">
+                      {monthNames[currentMonth]} {currentYear}
+                    </h2>
                     <button
-                      className="p-1 transition-colors hover:bg-gray-100 rounded-full"
+                      className="transition-colors hover:bg-gray-100 rounded-full p-1"
                       onClick={goToNextMonth}
                     >
                       {/* Next arrow button */}
@@ -311,19 +310,19 @@ const Calendar: React.FC = () => {
                       </svg>
                     </button>
                   </div>
-                </div>
 
-                <div className="flex gap-0 border border-[#D5D5D5] rounded-[12px] overflow-hidden">
-                  <button className="py-[10px] px-[20px] text-[12px] font-semibold text-[#202224] bg-[#FAFBFD] hover:bg-[#F0F3F9]">
-                    Day
-                  </button>
-                  <button className="py-[10px] px-[20px] text-[12px] font-semibold text-[#202224] bg-[#FAFBFD] hover:bg-[#F0F3F9]">
-                    Week
-                  </button>
-                  <button className="py-[10px] px-[20px] text-[12px] font-semibold text-white bg-[#5A8DFF]">
-                    Month
-                  </button>
-                  <div className="border-l border-[#979797]/70 h-full opacity-70"></div>
+                  <div className="flex gap-0 border border-[#D5D5D5] rounded-[12px] overflow-hidden">
+                    <button className="py-[10px] px-[20px] text-[12px] font-semibold text-[#202224] bg-[#FAFBFD] hover:bg-[#F0F3F9]">
+                      Day
+                    </button>
+                    <button className="py-[10px] px-[20px] text-[12px] font-semibold text-[#202224] bg-[#FAFBFD] hover:bg-[#F0F3F9]">
+                      Week
+                    </button>
+                    <button className="py-[10px] px-[20px] text-[12px] font-semibold text-white bg-[#5A8DFF]">
+                      Month
+                    </button>
+                    <div className="border-l border-[#979797]/70 h-full opacity-70"></div>
+                  </div>
                 </div>
               </div>
 
